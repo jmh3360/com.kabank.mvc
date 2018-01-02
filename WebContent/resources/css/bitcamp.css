@@ -1,0 +1,7 @@
+@charset "UTF-8";
+table{border: solid 1px black; margin: 0 auto; width: 700px; height: 300px}
+table tr td{border: solid 1px black; height: 10%; width: 13%;}
+table tr th{height: 5px;}
+select{height: 50%;width: 70%}
+button{height: 50px;width: 70px;}
+#bitcamp_attendance_btn_box{border: soid 0px white;}

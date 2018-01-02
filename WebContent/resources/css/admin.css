@@ -1,0 +1,10 @@
+@charset "UTF-8";
+#admin_header{text-align: center}
+#admin_sidebar{float : left; margin-left: 50px; width: 15%; height: 500px; border-style: solid}
+#admin_table{border-collapse: collapse ; width:50%; height:500px; text-align: center; border-style: solid}
+#admin_section{margin-left: 10px; width: 70%; height: 500px; margin-left: 10px; border: 1px solid black} 
+#input_serch{width: 200px; height: 30px}
+#admin_select{width:50px; height: 30px}
+#input_serch_btn{width: 60px; height: 30px}
+#admin_serchbox{text-align: center}
+#admin_main_wrapper{margin-top: 50px}
