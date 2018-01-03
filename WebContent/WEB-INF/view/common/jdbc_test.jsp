@@ -7,25 +7,8 @@
 	<title>JDBC TEST</title>
 </head>
 <body>
-	<%
-	try{
-	Class.forName("oracle.jdbc.driver.OracleDriver");
-	Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", //연결 
-			"bitcamp", "bitcamp"); 
-	Statement stmt = conn.createStatement();
-	String sql = "SELECT * FROM tab"; 
-	ResultSet rs = stmt.executeQuery(sql); //실행하는 부분
-	String count = "";
-	while(rs.next()){
-		count = rs.getString("tname"); //결과 전송
-	}
-	System.out.println("테이블 이름 :" + count);
-	%>테이블 갯수는<%=count %> 입니다.<%
-	}catch(Exception e){
-		e.printStackTrace();
-	}
-	
-	%>
+	JDBC TEST에 들어옴 <br />
+	DB에 있는 테이블 수는 ${requestScope.count}개입니다.
 	
 </body>
 </html>

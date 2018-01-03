@@ -2,9 +2,9 @@
 <%@ page import="java.util.*" %>
 <!doctype html>
 <html lang="en">
-<link rel="stylesheet" href="<%=application.getContextPath()%>/resources/css/common.css" />
-<link rel="stylesheet" href="<%=application.getContextPath()%>/resources/css/member.css" />
-<link rel="stylesheet" href="<%=application.getContextPath()%>/resources/img/img/favicon.ico" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/member.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/img/img/favicon.ico" />
 <body>
 <%@ include file="../common/header.jsp"%>
 <section>
@@ -15,7 +15,8 @@
 </article>
 </section>
 <aside></aside>
-<form id = "join_form" action="join.jsp">
+<form id = "join_form" action="${pageContext.request.contextPath}/user/login.do;"> <!-- 위치 경로를 servlet으로 보내고 
+servlet에서 경로를 지정하여 이동한다.!!  -->
 <table id="member_table">
 
 <!-- 페이지 안에는 동일한 id가 존재해서는 안된다.  -->
@@ -92,7 +93,7 @@
 	</tr>
 	
 	
-	<tr><td colspan="3" style="text-align: center;" > <button id="joint_confirm_btn" name="joint_confirm_btn">회원가입</button></td></tr>
+	<tr><td colspan="3" style="text-align: center;" > <button id="join_confirm_btn" name="join_confirm_btn">회원가입</button></td></tr>
 	
 </table>
 
@@ -100,13 +101,14 @@
 
 </form>
 <%@ include file="../common/footer.jsp"%>
-<script>
-
-var join_link = document.querySelector('#joint_confirm_btn');
+<script>  /* form의 쌓여진 순간 location은 사용못한다 그래서 submit을 사용하면된다. */
+var join_link = document.querySelector('#join_confirm_btn');
 join_link.addEventListener("click",goLogin,false);
 function goLogin() {
-	location.href = "<%=application.getContextPath()%>/member/login.do";
+	
+	document.querySelector('#join_form').submit();
 }
+/* form의 기능을 정의해준다. */
 </script>
 </body>
 </html>

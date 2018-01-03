@@ -5,9 +5,9 @@
 <head>
 	<meta charset="UTF-8" />
 	<title>Index</title>
-	<link rel="shortcut icon" href="<%=application.getContextPath()%>/resources/img/favicon.ico" />
-	<link rel="stylesheet" href="<%=application.getContextPath()%>/resources/css/common.css" />
-	<link rel="stylesheet" href="<%=application.getContextPath()%>/resources/css/index.css" />
+	<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico" />
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css" />
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/index.css" />
 	<script src="../js/index.js"></script>
 	<script src="../js/link.js"></script>
 </head>
@@ -57,6 +57,7 @@
 				</form>
 				<a id="go_admin_link" href="#">관리자</a>
 				<a id="go_join_link" href="#">회원가입</a>
+				<a id="go_jdbc_link" href="#">JDBCTest</a>
 			
 			</td>
 		</tr>
@@ -67,11 +68,15 @@
 <%@ include file="../common/footer.jsp"%>
 </body>
 </html>
-<script>
-var join_link = document.querySelector('#go_join_link');
-join_link.addEventListener("click",goJoin,false);
-function goJoin() {
-	location.href = "<%=application.getContextPath()%>/member/join.do";
-	
-}
+<script> 
+document.querySelector('#go_join_link').addEventListener("click",function() {
+	location.href = "${pageContext.request.contextPath}/user/join.do";},false);
+
+document.querySelector('#go_admin_link').addEventListener("click",function() {
+	location.href = "${pageContext.request.contextPath}/Admin/admin.do"},false);
+
+document.querySelector('#go_jdbc_link').addEventListener("click",function() {
+	location.href = "${pageContext.request.contextPath}/common/jdbc_test.do"},false);
+	/* 스크립틀릿은 자바영역이기때문에 application을 사용하여 이동하지만 EL은jsp영역이이게 현재 page에 해당하는
+    pageContext를 사용하여 이동한다. */
 </script>
