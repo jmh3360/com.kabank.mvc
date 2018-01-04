@@ -10,8 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kabank.mvc.constant.Path;
+import com.kabank.mvc.domain.MemberBean;
+import com.kabank.mvc.serviceimpl.MemberServiceImpl;
 
-@WebServlet({"/user/login.do","/user/join.do"})//, urlPatterns = { "/MemberController" })
+@WebServlet({"/user/login.do","/user/join.do","/user/auth.do"})//, urlPatterns = { "/MemberController" })
 public class MemberController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -38,13 +40,31 @@ public class MemberController extends HttpServlet {
 		*/  /*간소화*/
 		
 		String dir = request.getServletPath().split(Path.SEPARATOR)[1];
-		
+		System.out.println(dir);
 		String dest = request.getServletPath().split(Path.SEPARATOR)[2].split(Path.DOT)[0];
-		
-		
+		switch (dest) {
+		case "auth": 
+			MemberBean m = new MemberBean();
+			m.setId(request.getParameter("index_input_id"));
+			m.setPass(request.getParameter("index_input_pass"));
+			boolean flag = new MemberServiceImpl().login(m);
+			System.out.println("누구냐넌"+flag);
+			if(flag) {
+				dir = "bitcamp";
+				dest ="main";
+			}else {
+				dir = "user";
+				dest = "login";		
+			}
+			request.
+			getRequestDispatcher(Path.VIEW+dir+Path.SEPARATOR+dest+Path.EXTENSION).forward(request, response);
+			break;
+			
+		default:
+			break;
+		}
 		request.
 		getRequestDispatcher(Path.VIEW+dir+Path.SEPARATOR+dest+Path.EXTENSION).forward(request, response);
-		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

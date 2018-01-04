@@ -1,5 +1,7 @@
 package com.kabank.mvc.service;
 
-public interface MemberService {
+import com.kabank.mvc.domain.MemberBean;
 
+public interface MemberService {
+	public boolean login(MemberBean m);
 }

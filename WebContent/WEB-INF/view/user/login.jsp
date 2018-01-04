@@ -19,7 +19,6 @@
 </header>
 <section id="index_section">
 <article>
-
 	<table id ="index_table">
 		<tr >
 			<td colspan="5">
@@ -33,11 +32,11 @@
 	text는 빈창을 생성하고 placeholder는 빈창에 미리보기기능
 	  -->
 			
-			<form action="burgerking/main.jsp">
+			<form id = "go_bitcamp_link" action="${pageContext.request.contextPath}/user/auth.do">
 					<table id="index_login_box">
 					<tr>
 						<td>
-						<input id="index_input_id" type="text" name="id" placeholder = "아이디" tabindex="1"/>
+						<input id="index_input_id" type="text" name="index_input_id" placeholder = "아이디" tabindex="1"/>
 						</td>
 						
 						<td rowspan="2" >
@@ -49,7 +48,7 @@
 					
 					<tr >
 						<td >
-						<input id="index_input_pass" name="pw" placeholder = "비밀번호" tabindex="2"/>
+						<input id="index_input_pass" name="index_input_pass" placeholder = "비밀번호" tabindex="2"/>
 						</td>
 					</tr>
 					
@@ -77,6 +76,11 @@ document.querySelector('#go_admin_link').addEventListener("click",function() {
 
 document.querySelector('#go_jdbc_link').addEventListener("click",function() {
 	location.href = "${pageContext.request.contextPath}/common/jdbc_test.do"},false);
+	
+	document.querySelector("#index_input_btn").addEventListener("click",function(){
+		alert('로그인입니다.');
+		document.querySelector('#go_bitcamp_link').submit()
+	},false);
 	/* 스크립틀릿은 자바영역이기때문에 application을 사용하여 이동하지만 EL은jsp영역이이게 현재 page에 해당하는
     pageContext를 사용하여 이동한다. */
 </script>

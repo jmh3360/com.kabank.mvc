@@ -1,26 +1,27 @@
 package com.kabank.mvc.daoImpl;
 
+import com.kabank.mvc.constant.CommonSQL;
+import com.kabank.mvc.constant.DBMS;
 import com.kabank.mvc.dao.CommonDAO;
 import java.sql.*;
 public class CommonDAOImpl implements CommonDAO {
 
+	
 	@Override
 	public String selectTableCount() {
 		String count = "";
 		Connection conn = null;
 		Statement stmt = null;
 		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe",
-					"bitcamp","bitcamp");
+			Class.forName(DBMS.ORACLE_DRIVER);
+			conn = DriverManager.getConnection(DBMS.ORACLE_CONNECITON_URL,
+					DBMS.ORACLE_USERNAME,DBMS.ORACLE_PASSWORD);
 			stmt = conn.createStatement();
-			String sql = "SELECT COUNT(*) AS count FROM tab";
-			ResultSet rs = stmt.executeQuery(sql);
+			ResultSet rs = stmt.executeQuery(CommonSQL.getCount("Member"));
 			while(rs.next()) {
 				count = rs.getString("count"); 
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
