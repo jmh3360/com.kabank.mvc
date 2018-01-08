@@ -15,7 +15,7 @@
 </article>
 </section>
 <aside></aside>
-<form id = "join_form" action="${pageContext.request.contextPath}/user/login.do;"> <!-- 위치 경로를 servlet으로 보내고 
+<form id = "join_form" action="${pageContext.request.contextPath}/user/memberjoin.do;"> <!-- 위치 경로를 servlet으로 보내고 
 servlet에서 경로를 지정하여 이동한다.!!  -->
 <table id="member_table">
 
@@ -51,8 +51,8 @@ servlet에서 경로를 지정하여 이동한다.!!  -->
 	
 	<tr>
 		<td>주민번호 </td>
-		<td colspan="2"><input id ="input_ssn" name="input_ssn" type="date" name="ssn" /> -
-		<input id ="input_ssn2" name="input_ssn2" type="text" name="ssn2" placeholder="앞 1자리"/> </td>
+		<td colspan="2"><input id ="input_ssn" name="input_ssn" type="text" /> -
+		<input id ="input_ssn2" name="input_ssn2" type="text"  placeholder="앞 1자리"/> </td>
 		
 	</tr>
 	
@@ -82,13 +82,13 @@ servlet에서 경로를 지정하여 이동한다.!!  -->
 	<tr>
 	<td>전화번호</td>
 	<td >
-	<select style="width: 50px; height: 34px;">
+	<select name = "phone1" style="width: 50px; height: 34px;">
 	<option value="010">010</option>
 	<option value="02">02</option>
 	<option value="031">031</option>
 	</select> -
-	<input style="width: 80px; height: 30px;" pattern="[0-9]{4}" type="text" /> -
-	<input style="width: 80px; height: 30px;" pattern="[0-9]{4}" type="text" />
+	<input name="phone2" style="width: 80px; height: 30px;" pattern="[0-9]{4}" type="text" /> -
+	<input name="phone3" style="width: 80px; height: 30px;" pattern="[0-9]{4}" type="text" />
 	</td>	
 	</tr>
 	
@@ -102,12 +102,16 @@ servlet에서 경로를 지정하여 이동한다.!!  -->
 </form>
 <%@ include file="../common/footer.jsp"%>
 <script>  /* form의 쌓여진 순간 location은 사용못한다 그래서 submit을 사용하면된다. */
-var join_link = document.querySelector('#join_confirm_btn');
+/* var join_link = document.querySelector('#join_confirm_btn');
 join_link.addEventListener("click",goLogin,false);
 function goLogin() {
 	
 	document.querySelector('#join_form').submit();
-}
+} */
+
+document.querySelector('#join_confirm_btn').addEventListener('click',function(){
+	document.querySelector('#joun_form').submit();
+},false);
 /* form의 기능을 정의해준다. */
 </script>
 </body>

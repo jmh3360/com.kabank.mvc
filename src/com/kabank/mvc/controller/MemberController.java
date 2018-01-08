@@ -8,15 +8,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.kabank.mvc.constant.Path;
 import com.kabank.mvc.domain.MemberBean;
 import com.kabank.mvc.serviceimpl.MemberServiceImpl;
 
-@WebServlet({"/user/login.do","/user/join.do","/user/auth.do"})//, urlPatterns = { "/MemberController" })
+@WebServlet({"/user/login.do","/user/join.do","/user/auth.do","/user/memberjoin.do"})//, urlPatterns = { "/MemberController" })
 public class MemberController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		System.out.println("서블릿 내부------------------------------------");
@@ -42,27 +42,43 @@ public class MemberController extends HttpServlet {
 		String dir = request.getServletPath().split(Path.SEPARATOR)[1];
 		System.out.println(dir);
 		String dest = request.getServletPath().split(Path.SEPARATOR)[2].split(Path.DOT)[0];
+		System.out.println(dest);
+		MemberBean m = new MemberBean();
+		HttpSession session = request.getSession();
 		switch (dest) {
 		case "auth": 
-			MemberBean m = new MemberBean();
 			m.setId(request.getParameter("index_input_id"));
 			m.setPass(request.getParameter("index_input_pass"));
-			boolean flag = new MemberServiceImpl().login(m);
-			System.out.println("누구냐넌"+flag);
-			if(flag) {
+			MemberBean member = new MemberServiceImpl().findById(m);
+			System.out.println("누구냐넌"+member);
+			if(member != null) {
 				dir = "bitcamp";
 				dest ="main";
+				session.setAttribute("user", member);
 			}else {
 				dir = "user";
 				dest = "login";		
 			}
-			request.
-			getRequestDispatcher(Path.VIEW+dir+Path.SEPARATOR+dest+Path.EXTENSION).forward(request, response);
 			break;
-			
+		case "memberjoin" :
+			dir = "user";
+			dest = "login";
+			System.out.println("생년월일:" + request.getParameter("input_ssn" + "ssn2"));
+			System.out.println("전화번호: " + request.getParameter("phone1" + "phone2" + "phone3"));
+			m.setId(request.getParameter("input_id"));
+			m.setPass(request.getParameter("input_pass"));
+			m.setName(request.getParameter("input_name"));
+			m.setSsn(request.getParameter("input_ssn" + "ssn2"));
+			m.setEmail(request.getParameter("input_email"));
+			m.setAddr(request.getParameter("input_addr"));
+			m.setPhone(request.getParameter("phone1" + "phone2" + "phone3"));
+			new MemberServiceImpl().join(m);
+			System.out.println((Path.VIEW+dir+Path.SEPARATOR+dest+Path.EXTENSION));
+			break;
 		default:
 			break;
 		}
+		System.out.println(Path.VIEW+dir+Path.SEPARATOR+dest+Path.EXTENSION);
 		request.
 		getRequestDispatcher(Path.VIEW+dir+Path.SEPARATOR+dest+Path.EXTENSION).forward(request, response);
 	}

@@ -5,8 +5,7 @@
 <head>
 	<meta charset="UTF-8" />
 	<title>Document</title>
-	<link rel="stylesheet" href="../../css/admin.css" />
-	<script src="../../js/admin/member_register_form.js"></script>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resuorce/css/admin.css" />
 </head>
 
 <body>
@@ -22,7 +21,7 @@
 
 
 
-	<form id ="member_register_form" action="member_register.jsp">
+	<form id ="member_register_form" action="${pageContext.request.contextPath}/admin/member_list.do">
 	<table id="admin_table">
 		<tr><td>ID : <input name = "id" type="text" /></td></tr>
 		<tr><td>PASS : <input name = "pass" type="text" /></td></tr>
@@ -41,3 +40,8 @@
 	<%@ include file="../common/footer.jsp"%>
 </body>
 </html>
+<script>
+document.querySelector('#memeber_register_btn').addEventListener('click',function(){
+	document.querySelector('#member_register_form').submit();
+},false);
+</script>

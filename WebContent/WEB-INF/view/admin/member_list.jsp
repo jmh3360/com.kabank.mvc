@@ -30,7 +30,8 @@ try{
 			}
 		}
 			if(!exist) {
-				stmt.executeUpdate("CREATE TABLE Member("
+				stmt.executeUpdate(
+						"CREATE TABLE Member("
 						+"id VARCHAR2(20) PRIMARY KEY,"
 						+"pass VARCHAR2(20),"
 						+"name VARCHAR2(20),"
@@ -76,8 +77,7 @@ try{
 <head>
 	<meta charset="UTF-8" />
 	<title>Document</title>
-	<link rel="stylesheet" href="../../css/admin.css" />
-	<script src="../../js/admin/member_list.js"></script>
+	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/admin.css" />
 </head>
 
 <body>
@@ -118,3 +118,8 @@ try{
 	<%@ include file="../common/footer.jsp"%>
 </body>
 </html>
+<script>
+document.querySelector('#member_register_form_btn').addEventListener('click',function(){
+	location.href = "${pageContext.request.contextPath}/admin/member_register_form.do";
+},false);
+</script>

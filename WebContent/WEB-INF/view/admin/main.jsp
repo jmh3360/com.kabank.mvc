@@ -4,8 +4,7 @@
 <head>
 	<meta charset="UTF-8" />
 	<title>Document</title>
-	<link rel="stylesheet" href="../../css/admin.css" />
-	<script src="../../js/admin/main.js"></script>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin.css" />
 </head>
 
 <body>
@@ -22,14 +21,23 @@
 
 	<table id="admin_table">
 		<tr>
-			<td  > <button id="create_table_btn"> 테이블생성</button> </td>
-			<td >테이블생성</td>
-			<td >테이블생성</td>
+			<td  > <button id="table_btn"> 테이블</button> </td>
+			<td >준비중</td>
+			<td >준비중</td>
 		</tr>
 		<tr>
-			<td >테이블생성</td>
-			<td >테이블생성</td>
-			<td >테이블생성</td>
+			<td >준비중</td>
+			<td >준비중</td>
+			<td >테이블 생성 <br />
+				<form id ="create_table" action="${pageContext.request.contextPath}/admin/create_table.do">
+					<select name = table_name>
+						<option  value ="member" >회원 테이블</option>
+						<option  value="attend">출석 테이블</option>
+					</select>
+					<input type="text" placeholder="생성할 테이블 명" />
+					<button id ="create_table_btn">생성</button>
+				</form>
+			</td> 
 		</tr>
 	</table>
 	
@@ -38,3 +46,13 @@
 	<%@ include file="../common/footer.jsp"%>
 </body>
 </html>
+<script>
+document.querySelector('#table_btn').addEventListener('click',function(){
+	location.href = "${pageContext.request.contextPath}/admin/member_list.do";
+},false);
+
+document.querySelector('#create_table_btn').addEventListener("click",function(){
+	document.querySelector('#create_table').submit;
+},false;);
+
+</script>

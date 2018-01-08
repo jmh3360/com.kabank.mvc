@@ -14,19 +14,16 @@ public class MemberServiceImpl implements MemberService{
 		dao = new MemberDAOImpl();
 	}
 	@Override
-	public boolean login(MemberBean m) {
-		boolean foo = false;
+	public MemberBean findById (MemberBean m) {
+		MemberBean mem = dao.selectMemberById(m);
 		
-		List<MemberBean> list = dao.selectMembers();
-			
-		for(int i = 0; i<list.size(); i++) {
-				if(m.getId().equals(list.get(i).getId())
-						&&m.getPass().equals(list.get(i).getPass())) {
-					foo = true;
-					
-				}
-			}
-		return foo;
+		return mem;
 	}
+	@Override
+	public void join(MemberBean bean) {
+		System.out.println("서비스impl :\n"+bean);
+		new MemberDAOImpl().memberJoin(bean);
+	}
+
 
 }

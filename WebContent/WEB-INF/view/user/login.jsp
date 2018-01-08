@@ -72,7 +72,7 @@ document.querySelector('#go_join_link').addEventListener("click",function() {
 	location.href = "${pageContext.request.contextPath}/user/join.do";},false);
 
 document.querySelector('#go_admin_link').addEventListener("click",function() {
-	location.href = "${pageContext.request.contextPath}/Admin/admin.do"},false);
+	location.href = "${pageContext.request.contextPath}/admin/main.do"},false);
 
 document.querySelector('#go_jdbc_link').addEventListener("click",function() {
 	location.href = "${pageContext.request.contextPath}/common/jdbc_test.do"},false);
