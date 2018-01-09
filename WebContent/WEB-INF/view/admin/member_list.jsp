@@ -72,13 +72,6 @@ try{
 
 %>
 
-<!doctype html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8" />
-	<title>Document</title>
-	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/admin.css" />
-</head>
 
 <body>
 <%@ include file="../common/header.jsp"%>

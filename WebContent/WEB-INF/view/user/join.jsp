@@ -1,10 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.*" %>
-<!doctype html>
-<html lang="en">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css" />
+
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/member.css" />
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/img/img/favicon.ico" />
 <body>
 <%@ include file="../common/header.jsp"%>
 <section>

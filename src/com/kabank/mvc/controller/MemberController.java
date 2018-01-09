@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import com.kabank.mvc.constant.Path;
 import com.kabank.mvc.domain.MemberBean;
+import com.kabank.mvc.service.MemberService;
 import com.kabank.mvc.serviceimpl.MemberServiceImpl;
 
 @WebServlet({"/user/login.do","/user/join.do","/user/auth.do","/user/memberjoin.do"})//, urlPatterns = { "/MemberController" })
@@ -45,11 +46,14 @@ public class MemberController extends HttpServlet {
 		System.out.println(dest);
 		MemberBean m = new MemberBean();
 		HttpSession session = request.getSession();
+		MemberService service = MemberServiceImpl.getInstance();
+		
 		switch (dest) {
 		case "auth": 
 			m.setId(request.getParameter("index_input_id"));
 			m.setPass(request.getParameter("index_input_pass"));
-			MemberBean member = new MemberServiceImpl().findById(m);
+			MemberBean member =  service.findById(m);
+			
 			System.out.println("누구냐넌"+member);
 			if(member != null) {
 				dir = "bitcamp";
@@ -72,7 +76,7 @@ public class MemberController extends HttpServlet {
 			m.setEmail(request.getParameter("input_email"));
 			m.setAddr(request.getParameter("input_addr"));
 			m.setPhone(request.getParameter("phone1" + "phone2" + "phone3"));
-			new MemberServiceImpl().join(m);
+			service.join(m);
 			System.out.println((Path.VIEW+dir+Path.SEPARATOR+dest+Path.EXTENSION));
 			break;
 		default:

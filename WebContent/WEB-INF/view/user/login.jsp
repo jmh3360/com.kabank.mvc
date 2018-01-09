@@ -1,16 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 
-<!doctype html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8" />
-	<title>Index</title>
-	<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico" />
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css" />
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/index.css" />
-	<script src="../js/index.js"></script>
-	<script src="../js/link.js"></script>
-</head>
+	<link rel="stylesheet" href="${css}/common.css" />
+	<link rel="stylesheet" href="${css}/index.css" />
 
 <body>
 <div id="wrapper">
@@ -32,11 +23,11 @@
 	text는 빈창을 생성하고 placeholder는 빈창에 미리보기기능
 	  -->
 			
-			<form id = "go_bitcamp_link" action="${pageContext.request.contextPath}/user/auth.do">
+			<form id = "go_bitcamp_link" action="${ctx}/user/auth.do">
 					<table id="index_login_box">
 					<tr>
 						<td>
-						<input id="index_input_id" type="text" name="index_input_id" placeholder = "아이디" tabindex="1"/>
+						<input id="index_input_id" type="text" name="index_input_id" placeholder = "아이디" tabindex="1" value="jmh3360"/>
 						</td>
 						
 						<td rowspan="2" >
@@ -48,7 +39,7 @@
 					
 					<tr >
 						<td >
-						<input id="index_input_pass" name="index_input_pass" placeholder = "비밀번호" tabindex="2"/>
+						<input id="index_input_pass" name="index_input_pass" placeholder = "비밀번호" tabindex="2" value="123"/>
 						</td>
 					</tr>
 					

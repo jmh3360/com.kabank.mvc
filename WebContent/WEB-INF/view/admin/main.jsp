@@ -1,12 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!doctype html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8" />
-	<title>Document</title>
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin.css" />
-</head>
-
+	<link rel="stylesheet" href="${css}/admin.css" />
 <body>
 <%@ include file="../common/header.jsp"%>
 <header id="admin_header"><h2>관리자 페이지</h2></header>

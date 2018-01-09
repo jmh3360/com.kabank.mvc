@@ -1,14 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!doctype html>
-<html lang="en">
-<%@ include file="../common/head.jsp"%>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css" />
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bitcamp.css" />
-<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico" />
-<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/img/chips.jpg" />
-<body>
 	<%@ include file="../common/header.jsp"%>
 <%@ include file="../common/nav.jsp"%>
+<link rel="stylesheet" href="${css}/bitcamp.css" />
 <div id ="wrapper">
 <h2> 비트 캠프 메인</h2>
 <section>

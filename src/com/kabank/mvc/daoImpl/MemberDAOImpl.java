@@ -13,20 +13,28 @@ import com.kabank.mvc.util.Enums;
 
 public class MemberDAOImpl implements MemberDAO {
 	
+	public static MemberDAO getInstance() {
+		return new MemberDAOImpl();
+	}
+	
+	private MemberDAOImpl() {
+		try {
+			Class.forName(DBMS.ORACLE_DRIVER);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 	@Override
 	public List<MemberBean> selectMembers() {
 		String id = "";
 		String pass = "";
 		List<MemberBean> list = new ArrayList<MemberBean>();
-		Connection conn = null;
-		Statement stmt = null;
 		try {
-			Class.forName(DBMS.ORACLE_DRIVER);
-			 conn = DriverManager.getConnection(DBMS.ORACLE_CONNECITON_URL,
-						DBMS.ORACLE_USERNAME,DBMS.ORACLE_PASSWORD);
-			stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT id,pass FROM Member");
+			
+			ResultSet rs = DriverManager.getConnection(DBMS.ORACLE_CONNECITON_URL,
+						DBMS.ORACLE_USERNAME,DBMS.ORACLE_PASSWORD).createStatement().executeQuery("SELECT id,pass FROM Member");
 			while(rs.next()) {
 				MemberBean m = new MemberBean();
 				id = rs.getString("id");
@@ -45,19 +53,17 @@ public class MemberDAOImpl implements MemberDAO {
 		return list;
 		}
 
+
+
 	@Override
 	public void memberJoin(MemberBean bean) {
 		System.out.println("쿼리문 진입");
-		Statement stmt;
 		try {
-			Class.forName(DBMS.ORACLE_DRIVER);
-			Connection conn=DriverManager.getConnection(
+			
+			DriverManager.getConnection(
 					DBMS.ORACLE_CONNECITON_URL,
 					DBMS.ORACLE_USERNAME,
-					DBMS.ORACLE_PASSWORD);
-			stmt=conn.createStatement();
-			String a=
-					String.format("%s %s %s("
+					DBMS.ORACLE_PASSWORD).createStatement().executeQuery(String.format("%s %s %s("
 							+Enums.getEnu()+")"
 							+ " VALUES("
 							+Enums.getBlanks(Enums.MemberColumn.values().length)
@@ -73,9 +79,7 @@ public class MemberDAOImpl implements MemberDAO {
 							bean.getEmail(),
 							bean.getProfile(),
 							bean.getAddr()
-							);
-			System.out.println(a);
-			stmt.executeQuery(a);
+							));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -84,16 +88,9 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public MemberBean selectMemberById(MemberBean m) {
 		MemberBean mem = null;
-		String sql = "SELECT * FROM MEMBER WHERE id =? AND pass = ?";
-		String id = "";
-		String pass = "";
 		try {
-			Class.forName(DBMS.ORACLE_DRIVER);
-			Connection conn = DriverManager.getConnection(DBMS.ORACLE_CONNECITON_URL, DBMS.ORACLE_USERNAME, DBMS.ORACLE_PASSWORD);
-			PreparedStatement pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, m.getId());
-			pstmt.setString(2, m.getPass());
-			ResultSet rs = pstmt.executeQuery();
+			ResultSet rs = DriverManager.getConnection(DBMS.ORACLE_CONNECITON_URL, DBMS.ORACLE_USERNAME, DBMS.ORACLE_PASSWORD).
+			createStatement().executeQuery(String.format("SELECT * FROM MEMBER WHERE id ='%s' AND pass='%s'", m.getId(),m.getPass()));
 			while(rs.next()) {
 				mem = new MemberBean();
 				mem.setId(rs.getString("id"));
