@@ -60,13 +60,13 @@
 </html>
 <script> 
 document.querySelector('#go_join_link').addEventListener("click",function() {
-	location.href = "${pageContext.request.contextPath}/user/join.do";},false);
+	location.href = "${ctx}/user/join.do";},false);
 
 document.querySelector('#go_admin_link').addEventListener("click",function() {
-	location.href = "${pageContext.request.contextPath}/admin/main.do"},false);
+	location.href = "${ctx}/admin/main.do"},false);
 
 document.querySelector('#go_jdbc_link').addEventListener("click",function() {
-	location.href = "${pageContext.request.contextPath}/common/jdbc_test.do"},false);
+	location.href = "${ctx}/common/jdbc_test.do"},false);
 	
 	document.querySelector("#index_input_btn").addEventListener("click",function(){
 		alert('로그인입니다.');

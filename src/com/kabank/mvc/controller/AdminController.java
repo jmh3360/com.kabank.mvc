@@ -9,9 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kabank.mvc.constant.Path;
 import com.kabank.mvc.dao.AdminDAO;
 import com.kabank.mvc.daoImpl.AdminDAOImpl;
+import com.kabank.mvc.enums.PathEnum;
 import com.kabank.mvc.service.AdminService;
 import com.kabank.mvc.serviceimpl.AdminServiceImpl;
 
@@ -21,8 +21,8 @@ public class AdminController extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String dir = request.getServletPath().split(Path.SEPARATOR)[1];
-		String dest = request.getServletPath().split(Path.SEPARATOR)[2].split(Path.DOT)[0];
+		String dir = request.getServletPath().split(PathEnum.SEPARATOR.toString())[1];
+		String dest = request.getServletPath().split(PathEnum.SEPARATOR.toString())[2].split(PathEnum.DOT.toString())[0];
 		
 		
 		
@@ -46,8 +46,8 @@ public class AdminController extends HttpServlet {
 		default:
 			break;
 		}
-		request.getRequestDispatcher(Path.VIEW + dir + Path.SEPARATOR + dest + Path.EXTENSION).forward(request,
-				response);
+		request.getRequestDispatcher(PathEnum.VIEW.toString() + dir + PathEnum.SEPARATOR.toString() + dest + PathEnum.EXTENSION.toString()).
+		forward(request,response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

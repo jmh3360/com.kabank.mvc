@@ -2,14 +2,15 @@ package com.kabank.mvc.dao;
 
 import java.sql.*;
 
-import com.kabank.mvc.constant.DBMS;
+import com.kabank.mvc.enums.OracleEnum;
+import com.kabank.mvc.factory.Oracle;
 
 public class JDBCTest {
 	public static void main(String[] args) {
 		try {
-			Class.forName(DBMS.ORACLE_DRIVER);
-			Connection conn = DriverManager.getConnection(DBMS.ORACLE_CONNECITON_URL,
-					 DBMS.ORACLE_USERNAME,DBMS.ORACLE_PASSWORD);
+			Class.forName(OracleEnum.ORACLE_DRIVER.toString());
+			Connection conn = DriverManager.getConnection(OracleEnum.ORACLE_CONNECITON_URL.toString(),
+					OracleEnum.ORACLE_USERNAME.toString(),OracleEnum.ORACLE_PASSWORD.toString());
 			Statement stmt = conn.createStatement();
 			String sql = "SELECT COUNT(*) AS count FROM tab";
 			ResultSet rs = stmt.executeQuery(sql);

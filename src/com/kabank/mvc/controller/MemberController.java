@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.kabank.mvc.constant.Path;
 import com.kabank.mvc.domain.MemberBean;
+import com.kabank.mvc.enums.PathEnum;
 import com.kabank.mvc.service.MemberService;
 import com.kabank.mvc.serviceimpl.MemberServiceImpl;
 
@@ -40,9 +40,9 @@ public class MemberController extends HttpServlet {
 		rd.forward(request, response);
 		*/  /*간소화*/
 		
-		String dir = request.getServletPath().split(Path.SEPARATOR)[1];
+		String dir = request.getServletPath().split(PathEnum.SEPARATOR.toString())[1];
 		System.out.println(dir);
-		String dest = request.getServletPath().split(Path.SEPARATOR)[2].split(Path.DOT)[0];
+		String dest = request.getServletPath().split(PathEnum.SEPARATOR.toString())[2].split(PathEnum.DOT.toString())[0];
 		System.out.println(dest);
 		MemberBean m = new MemberBean();
 		HttpSession session = request.getSession();
@@ -77,14 +77,16 @@ public class MemberController extends HttpServlet {
 			m.setAddr(request.getParameter("input_addr"));
 			m.setPhone(request.getParameter("phone1" + "phone2" + "phone3"));
 			service.join(m);
-			System.out.println((Path.VIEW+dir+Path.SEPARATOR+dest+Path.EXTENSION));
+			System.out.println
+			((PathEnum.VIEW.toString()+dir+PathEnum.SEPARATOR.toString()+dest+PathEnum.EXTENSION));
 			break;
 		default:
 			break;
 		}
-		System.out.println(Path.VIEW+dir+Path.SEPARATOR+dest+Path.EXTENSION);
-		request.
-		getRequestDispatcher(Path.VIEW+dir+Path.SEPARATOR+dest+Path.EXTENSION).forward(request, response);
+		System.out.println
+		(PathEnum.VIEW.toString()+dir+PathEnum.SEPARATOR.toString()+dest+PathEnum.EXTENSION.toString());
+		request.getRequestDispatcher
+		(PathEnum.VIEW.toString()+dir+PathEnum.SEPARATOR.toString()+dest+PathEnum.EXTENSION.toString()).forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

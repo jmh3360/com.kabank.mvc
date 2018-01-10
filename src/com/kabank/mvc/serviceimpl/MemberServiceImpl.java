@@ -27,7 +27,7 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public void join(MemberBean bean) {
 		System.out.println("서비스impl :\n"+bean);
-		/*new MemberDAOImpl().memberJoin(bean);*/
+		dao.memberJoin(bean);
 	}
 
 

@@ -4,9 +4,14 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.kabank.mvc.constant.AdminSql;
-import com.kabank.mvc.constant.DBMS;
 import com.kabank.mvc.dao.AdminDAO;
+import com.kabank.mvc.enums.DDLEnum;
+import com.kabank.mvc.enums.DMLEnum;
+import com.kabank.mvc.enums.OracleEnum;
+import com.kabank.mvc.enums.Vendor;
+import com.kabank.mvc.factory.DataBaseFactory;
+import com.kabank.mvc.factory.Database;
+
 import java.util.*;
 
 public class AdminDAOImpl implements AdminDAO {
@@ -18,10 +23,12 @@ public class AdminDAOImpl implements AdminDAO {
 		Connection conn = null;
 		Statement stmt = null;
 		try {
-			Class.forName(DBMS.ORACLE_DRIVER);
-			conn = DriverManager.getConnection(DBMS.ORACLE_CONNECITON_URL,DBMS.ORACLE_USERNAME,DBMS.ORACLE_PASSWORD);
+			StringBuffer buffer = new StringBuffer(DMLEnum.SELECT.toString());
+			Class.forName(OracleEnum.ORACLE_DRIVER.toString());
+			conn = DriverManager.getConnection(OracleEnum.ORACLE_CONNECITON_URL.toString(),
+					OracleEnum.ORACLE_USERNAME.toString(),OracleEnum.ORACLE_PASSWORD.toString());
 			stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM tab");
+			ResultSet rs = stmt.executeQuery(buffer.insert(6," " + DMLEnum.ASTER).append(DMLEnum.TAB).toString());
 			while(rs.next()) {
 				String temp = rs.getString("TNAME");
 				list.add(temp);
@@ -36,10 +43,10 @@ public class AdminDAOImpl implements AdminDAO {
 			}
 			if(!foo) {
 				if(tname.equalsIgnoreCase("member")) {
-					stmt.executeUpdate(AdminSql.CREATE_MEMBER(tname));
+					stmt.executeUpdate(DDLEnum.CREATE_TABLE_MEMBER.toString());
 					System.out.println("멤버 생성");
 				}else if(tname.equalsIgnoreCase("attend")) {
-					stmt.executeUpdate(AdminSql.CREATE_ATTEND);
+					stmt.executeUpdate(DDLEnum.CREATE_TABLE_ATTEND.toString());
 					System.out.println("출석 생성");
 					
 				}
