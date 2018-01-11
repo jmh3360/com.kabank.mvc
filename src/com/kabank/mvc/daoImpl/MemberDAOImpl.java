@@ -11,6 +11,7 @@ import com.kabank.mvc.enums.MemberEnum;
 import com.kabank.mvc.enums.Vendor;
 import com.kabank.mvc.factory.DataBaseFactory;
 import com.kabank.mvc.factory.Oracle;
+import com.kabank.mvc.factory.SqlFactory;
 import com.kabank.mvc.util.Enums;
 
 public class MemberDAOImpl implements MemberDAO {
@@ -30,8 +31,7 @@ public class MemberDAOImpl implements MemberDAO {
 			StringBuffer buff = new StringBuffer(DMLEnum.SELECT.toString());
 			ResultSet rs =
 			DataBaseFactory.createDatabase(Vendor.ORACLE).getConnection().createStatement().
-			executeQuery(buff.insert(6, " "+MemberEnum.ID+", "+MemberEnum.PASS).toString());
-			
+			executeQuery(SqlFactory.create(6, " "+MemberEnum.ID.toString()+", "+MemberEnum.PASS.toString(),null));
 			while(rs.next()) {
 				MemberBean m = new MemberBean();
 				id = rs.getString(MemberEnum.ID.toString());
@@ -84,6 +84,9 @@ public class MemberDAOImpl implements MemberDAO {
 
 	@Override
 	public MemberBean selectMemberById(MemberBean m) {
+		System.out.println("=====selectMemberById IN======");
+		System.out.println("====ID:"+m.getId());
+		System.out.println("====ID:"+m.getPass());
 		MemberBean mem = null;
 		try {
 			ResultSet rs = DataBaseFactory.createDatabase(Vendor.ORACLE).getConnection().createStatement().
@@ -103,7 +106,8 @@ public class MemberDAOImpl implements MemberDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		System.out.println("====SPEC:"+m.toString());
+		System.out.println("=====selectMemberById out======");
 		return mem;
 	}
 }

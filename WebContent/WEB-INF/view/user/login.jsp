@@ -39,7 +39,11 @@
 					
 					<tr >
 						<td >
-						<input id="index_input_pass" name="index_input_pass" placeholder = "비밀번호" tabindex="2" value="123"/>
+						<input id="index_input_pass" name="index_input_pass" placeholder = "비밀번호" tabindex="2" value="1" />
+						<input type="hidden" name="cmd" value="login" />
+						<input type="hidden" name="dir" value="bitcamp" />
+						<input type="hidden" name="page" value="main" />
+						
 						</td>
 					</tr>
 					
@@ -60,7 +64,8 @@
 </html>
 <script> 
 document.querySelector('#go_join_link').addEventListener("click",function() {
-	location.href = "${ctx}/user/join.do";},false);
+	location.href = "${ctx}/user.do?cmd=join";},false);
+/* 	location.href = "${ctx}/user/join.do";},false); */
 
 document.querySelector('#go_admin_link').addEventListener("click",function() {
 	location.href = "${ctx}/admin/main.do"},false);
