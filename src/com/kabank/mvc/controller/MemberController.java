@@ -11,10 +11,11 @@ import javax.servlet.http.HttpSession;
 
 import com.kabank.mvc.command.Command;
 import com.kabank.mvc.command.InitCommand;
+import com.kabank.mvc.command.MoveCommand;
+import com.kabank.mvc.command.SearchCommand;
 import com.kabank.mvc.domain.MemberBean;
 import com.kabank.mvc.enums.Action;
 import com.kabank.mvc.factory.ActionFactory;
-import com.kabank.mvc.factory.CommandFactory;
 import com.kabank.mvc.service.MemberService;
 import com.kabank.mvc.serviceimpl.MemberServiceImpl;
 import com.kabank.mvc.util.DispatcherSelvlet;
@@ -23,73 +24,52 @@ import com.kabank.mvc.util.DispatcherSelvlet;
 public class MemberController extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		System.out.println("서블릿 내부------------------------------------");
 		
-		MemberBean m = new MemberBean();
-		InitCommand.init(request, response);
 		HttpSession session = request.getSession();
-		MemberService service = MemberServiceImpl.getInstance();
-		
-		String dest = "";
+		InitCommand init = new InitCommand(request);
+		init.execute();
+	
 		switch (InitCommand.cmd.getAction()) {
 		case MOVE: 
-			System.out.println("========member : move======");
+			System.out.println("========member : move IN======");
+			move(request);
+			System.out.println("DEST IS" + InitCommand.cmd.getView());
+			System.out.println("===MEMBER-C: MOVE OUT==========");
 			DispatcherSelvlet.send(request, response);
-			 
-			m.setId(request.getParameter("index_input_id"));
-			m.setPass(request.getParameter("index_input_pass"));
-			MemberBean member =  service.findById(m);
+			break;
+		case UPDATE_PASS :
+			System.out.println("member-c : update passIn");
 			
-		/*	System.out.println("누구냐넌"+member);
-			if(member != null) {
-				dir = "bitcamp";
-				dest ="main";
-				session.setAttribute("user", member);
-			}else {
-				dir = "user";
-				dest = "login";		
-			}*/
+			String currentPass = request.getParameter("current_pass");
+			String changePass = request.getParameter("change_pass");
+			String changePassCheck = request.getParameter("change_pass_check");
+			DispatcherSelvlet.send(request, response);
 			break;
 		case ADD:
 			System.out.println("========member : ADD======");
 			break;
 		case LOGIN:
-			System.out.println("========member : login======");
-			String dir = request.getParameter("dir");
-			String page = request.getParameter("page");
-			member = new MemberBean();
-			member.setId(request.getParameter("index_input_id"));
-			member.setPass(request.getParameter("index_input_pass"));
-			MemberBean result = null;
-			result = MemberServiceImpl.getInstance().findById(member);
-			if(result == null) {
-				DispatcherSelvlet.send(request, response);
-				
-			}else {
-				
-			}
-			
-			System.out.println("========member : logout======");
+			System.out.println("========member-C : login======");
+			login(request, session);
+			System.out.println("DEST IS" + InitCommand.cmd.getView());
+			DispatcherSelvlet.send(request, response);
 			break;
 		case JOIN :
 			System.out.println("========member : join======");
-			
-			/*dir = "user";
-			dest = "login";*/
 			System.out.println("생년월일:" + request.getParameter("input_ssn" + "ssn2"));
 			System.out.println("전화번호: " + request.getParameter("phone1" + "phone2" + "phone3"));
+			MemberBean m = new MemberBean();
 			m.setId(request.getParameter("input_id"));
 			m.setPass(request.getParameter("input_pass"));
 			m.setName(request.getParameter("input_name"));
-			m.setSsn(request.getParameter("input_ssn" + "ssn2"));
+			m.setSsn(request.getParameter("input_ssn")+request.getParameter("ssn2"));
 			m.setEmail(request.getParameter("input_email"));
 			m.setAddr(request.getParameter("input_addr"));
-			m.setPhone(request.getParameter("phone1" + "phone2" + "phone3"));
-			service.join(m);
-			System.out.println
-			((Action.VIEW.toString()+/*dir*/""+Action.SEPARATOR.toString()+dest+Action.EXTENSION));
+			m.setPhone
+			(request.getParameter("phone1")+request.getParameter("phone2")+request.getParameter("phone3"));
 			break;
 		default:
 			break;
@@ -97,9 +77,22 @@ public class MemberController extends HttpServlet {
 		
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		doGet(request, response);
+	private void move(HttpServletRequest request) {
+		new MoveCommand(request).execute();
 	}
 
+	private void login(HttpServletRequest request, HttpSession session) {
+		new SearchCommand(request).execute();
+		
+		MemberBean member = MemberServiceImpl.getInstance().login();
+		if(member==null) {
+			InitCommand.cmd.setDir("user");
+			InitCommand.cmd.setPage("login");
+		}else {
+			session.setAttribute("user", member);
+			InitCommand.cmd.setDir("bitcamp");
+			InitCommand.cmd.setPage("main");
+		}
+		move(request);
+	}
 }

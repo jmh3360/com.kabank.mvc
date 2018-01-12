@@ -18,7 +18,7 @@ public class CommonDAOImpl implements CommonDAO {
 		Statement stmt = null;
 		try {
 			Class.forName(OracleEnum.ORACLE_DRIVER.toString());
-			ResultSet rs = DataBaseFactory.createDatabase(Vendor.ORACLE).getConnection().createStatement().
+			ResultSet rs = DataBaseFactory.create(Vendor.ORACLE).getConnection().createStatement().
 			executeQuery(DMLEnum.COUNT.toString()+TnameEnum.MEMBER);
 			while(rs.next()) {
 				count = rs.getString(DMLEnum.COUNT.toString()); 

@@ -2,14 +2,32 @@ package com.kabank.mvc.command;
 
 import com.kabank.mvc.enums.Action;
 
-public class Command implements Order {
-	protected String dir,page,search,column;
-	public String getSearch() {
-		return search;
+public class Command  {
+	protected String dir,page,search,column,cmd,data,view;
+	
+
+	public String getCmd() {
+		return cmd;
 	}
 
-	public void setSearch(String search) {
-		this.search = search;
+	public void setCmd(String cmd) {
+		this.cmd = cmd;
+	}
+
+	public String getData() {
+		return data;
+	}
+
+	public void setData(String data) {
+		this.data = data;
+	}
+
+	public String getView() {
+		return view;
+	}
+
+	public void setView(String view) {
+		this.view = view;
 	}
 
 	public String getColumn() {
@@ -49,15 +67,7 @@ public class Command implements Order {
 		this.action = action;
 	}
 
-	@Override
-	public String execute() {
-		
-		return Action.VIEW.toString()
-				+dir
-				+Action.SEPARATOR
-				+page
-				+Action.EXTENSION;
-	}
+	
 
 	
 	

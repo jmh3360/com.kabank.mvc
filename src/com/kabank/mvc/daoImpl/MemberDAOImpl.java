@@ -4,6 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.kabank.mvc.command.InitCommand;
 import com.kabank.mvc.dao.MemberDAO;
 import com.kabank.mvc.domain.MemberBean;
 import com.kabank.mvc.enums.DMLEnum;
@@ -30,7 +31,7 @@ public class MemberDAOImpl implements MemberDAO {
 		try {
 			StringBuffer buff = new StringBuffer(DMLEnum.SELECT.toString());
 			ResultSet rs =
-			DataBaseFactory.createDatabase(Vendor.ORACLE).getConnection().createStatement().
+			DataBaseFactory.create(Vendor.ORACLE).getConnection().createStatement().
 			executeQuery(SqlFactory.create(6, " "+MemberEnum.ID.toString()+", "+MemberEnum.PASS.toString(),null));
 			while(rs.next()) {
 				MemberBean m = new MemberBean();
@@ -57,7 +58,7 @@ public class MemberDAOImpl implements MemberDAO {
 		System.out.println("쿼리문 진입");
 		try {
 			
-			DataBaseFactory.createDatabase(Vendor.ORACLE).getConnection().createStatement().
+			DataBaseFactory.create(Vendor.ORACLE).getConnection().createStatement().
 			executeQuery(String.format("%s %s %s("
 					+Enums.getEnu()+")"
 					+ " VALUES("
@@ -89,7 +90,7 @@ public class MemberDAOImpl implements MemberDAO {
 		System.out.println("====ID:"+m.getPass());
 		MemberBean mem = null;
 		try {
-			ResultSet rs = DataBaseFactory.createDatabase(Vendor.ORACLE).getConnection().createStatement().
+			ResultSet rs = DataBaseFactory.create(Vendor.ORACLE).getConnection().createStatement().
 					executeQuery((String.format(DMLEnum.TUPLE_SERCH.toString(), m.getId(),m.getPass())));
 					
 			while(rs.next()) {
@@ -109,5 +110,37 @@ public class MemberDAOImpl implements MemberDAO {
 		System.out.println("====SPEC:"+m.toString());
 		System.out.println("=====selectMemberById out======");
 		return mem;
+	}
+
+	@Override
+	public MemberBean login() {
+		System.out.println("========member D: move IN======");
+		StringBuffer sql = new StringBuffer(
+				MemberEnum.LOGIN.toString());
+		String[] arr = InitCommand.cmd.getData().split("/");
+		System.out.println("ID :" + arr[0]);
+		System.out.println("PASS :" +arr[1]);
+		sql.replace(sql.indexOf("$"), sql.indexOf("$")+1, arr[0]);
+		sql.replace(sql.indexOf("@"), sql.indexOf("@")+1, arr[1]);
+		System.out.println(":::SQL:::"+sql.toString());
+		MemberBean member = null;
+		try {
+			ResultSet rs = DataBaseFactory.create(Vendor.ORACLE).getConnection().createStatement().executeQuery(sql.toString());
+		while(rs.next()) {
+			member = new MemberBean();
+			member.setId(rs.getString(MemberEnum.ID.toString()));
+			member.setPass(rs.getString(MemberEnum.PASS.toString()));
+			member.setName(rs.getString(MemberEnum.NAME.toString()));
+			member.setSsn(rs.getString(MemberEnum.SSN.toString()));
+			member.setPhone(rs.getString(MemberEnum.PHONE.toString()));
+			member.setEmail(rs.getString(MemberEnum.EMAIL.toString()));
+			member.setAddr(rs.getString(MemberEnum.ADDR.toString()));
+		}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		MemberBean m = null;
+		System.out.println("========member D: move out======");
+		return member;
 	}
 }

@@ -5,6 +5,7 @@
 <div id ="wrapper">
 <h2> 비트 캠프 메인</h2>
 <section>
+	<table><tr><td ><button id ="bitcamp_passupdate_btn" >비밀번호 변경</button></td></tr></table>
 	<form id = "bitcamp_form" action="result.jsp">
 <article>
 <table id="mypage_table">
@@ -86,7 +87,10 @@
 		
 		<td> 		</td>
 	</tr>
-	<tr><td id ="bitcamp_attendance_btn_box" colspan="7"><button id ="bitcamp_attendance_btn" style="">확인</button></td></tr>
+	<tr>
+	
+	<td id ="bitcamp_attendance_btn_box" colspan="7"><button id ="bitcamp_attendance_btn" style="">확인</button></td>
+	</tr>
 	</table>
 	<input name ="id" value="jmh3360" type="hidden"  />
 	</form>
@@ -95,5 +99,10 @@
 <aside> </aside>
 <%@ include file="../common/footer.jsp"%>
 </body>
-<script src="../../js/bitcamp/bitcamp.js"></script>
-</html>
+<script>
+	document.querySelector("#bitcamp_passupdate_btn").addEventListener('click',function(){
+		alert("난 자바가 좋아");
+		location.href = "${ctx}/user.do?cmd=move&dir=bitcamp&page=change_pass";
+	},false);
+	</script>
+	

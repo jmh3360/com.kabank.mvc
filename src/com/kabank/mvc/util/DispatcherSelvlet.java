@@ -13,7 +13,7 @@ import com.kabank.mvc.enums.PathEnum;
 public class DispatcherSelvlet {
 	public static void send (HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
-		request.getRequestDispatcher(InitCommand.cmd.execute()).forward(request, response);
+		request.getRequestDispatcher(InitCommand.cmd.getView()).forward(request, response);
 		
 	}
 

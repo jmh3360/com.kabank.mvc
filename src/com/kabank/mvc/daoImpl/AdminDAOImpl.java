@@ -10,7 +10,7 @@ import com.kabank.mvc.enums.DMLEnum;
 import com.kabank.mvc.enums.OracleEnum;
 import com.kabank.mvc.enums.Vendor;
 import com.kabank.mvc.factory.DataBaseFactory;
-import com.kabank.mvc.factory.Database;
+import com.kabank.mvc.factory.IDatabase;
 
 import java.util.*;
 

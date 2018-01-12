@@ -25,5 +25,10 @@ public class MemberServiceImpl implements MemberService{
 		MemberDAOImpl.getInstance().memberJoin(bean);
 	}
 
+	@Override
+	public MemberBean login() {
+		return MemberDAOImpl.getInstance().login();
+	}
+
 
 }

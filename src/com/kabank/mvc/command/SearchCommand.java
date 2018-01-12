@@ -1,14 +1,24 @@
 package com.kabank.mvc.command;
 
-import com.kabank.mvc.enums.Action;
+import java.util.Map;
 
-public class SearchCommand extends Command{
-	public SearchCommand(String dir, String page, Action action,String search, String column) {
-		setDir(dir);
-		setPage(page);
-		setAction(action);
-		setSearch(search);
-		setColumn(column);
-		execute();
+import javax.servlet.http.HttpServletRequest;
+
+import com.kabank.mvc.enums.Action;
+import com.kabank.mvc.iterator.ParamsIterator;
+
+public class SearchCommand implements IOrder{
+	Map<?, ?> map;
+	public SearchCommand(HttpServletRequest request) {
+		map = ParamsIterator.execute(request);
 	}
+	@Override
+	public void execute() {
+		String id = String.valueOf(map.get("id"));
+		String pass = String.valueOf(map.get("pass"));
+		InitCommand.cmd.setColumn("id/pass");
+		InitCommand.cmd.setData(id+"/"+pass);
+		
+	}
+	
 }

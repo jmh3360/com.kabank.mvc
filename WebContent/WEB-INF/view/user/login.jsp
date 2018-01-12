@@ -23,11 +23,11 @@
 	text는 빈창을 생성하고 placeholder는 빈창에 미리보기기능
 	  -->
 			
-			<form id = "go_bitcamp_link" action="${ctx}/user/auth.do">
+			<form id = "go_bitcamp_link" action="${ctx}/user.do">
 					<table id="index_login_box">
 					<tr>
 						<td>
-						<input id="index_input_id" type="text" name="index_input_id" placeholder = "아이디" tabindex="1" value="jmh3360"/>
+						<input id="index_input_id" type="text" name="id" placeholder = "아이디" tabindex="1" value="jmh3360"/>
 						</td>
 						
 						<td rowspan="2" >
@@ -39,7 +39,7 @@
 					
 					<tr >
 						<td >
-						<input id="index_input_pass" name="index_input_pass" placeholder = "비밀번호" tabindex="2" value="1" />
+						<input id="index_input_pass" name="pass" placeholder = "비밀번호" tabindex="2" value="123" />
 						<input type="hidden" name="cmd" value="login" />
 						<input type="hidden" name="dir" value="bitcamp" />
 						<input type="hidden" name="page" value="main" />
