@@ -9,7 +9,7 @@
 	<form id = "change" action="${ctx}/user.do">
 		<table>
 			<tr>
-				<td><input name="current_pass" type="text"
+				<td><input name="current_pass" type="text" value="${sessionScope.user.pass}"
 					placeholder="현재 비밀번호 확인" /></td>
 			</tr>
 			<tr>
@@ -19,7 +19,7 @@
 			<tr>
 				<td><input name="change_pass_check" type="text"
 					placeholder="변경할 비밀번호 확인" />
-					<input type="hidden" name="cmd" value="move" />
+						<input type="hidden" name="cmd" value="update_pass" />
 						<input type="hidden" name="dir" value="bitcamp" />
 						<input type="hidden" name="page" value="main" />
 					</td>

@@ -27,7 +27,13 @@ public class MemberServiceImpl implements MemberService{
 
 	@Override
 	public MemberBean login() {
-		return MemberDAOImpl.getInstance().login();
+		return MemberDAOImpl.getInstance().login()
+				;
+		
+	}
+
+	public void updatePass(MemberBean member) {
+		MemberDAOImpl.getInstance().changePass(member);
 	}
 
 

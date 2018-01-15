@@ -11,6 +11,7 @@ import com.kabank.mvc.iterator.ParamsIterator;
 
 public class InitCommand implements IOrder {
 	public static Command cmd;
+	
 	Map<?, ?> map;
 	public InitCommand(HttpServletRequest request) {
 		cmd = new Command();
@@ -22,7 +23,9 @@ public class InitCommand implements IOrder {
 		String o = String.valueOf(map.get("cmd"));
 		if(o.equals("null")) {
 			cmd.setAction(ActionFactory.create("move"));
-		}
+		}else {
+			System.out.println("액션이 정해졌다" + o);
 		cmd.setAction(ActionFactory.create(o));
+		}
 	}
 }

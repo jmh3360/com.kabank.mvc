@@ -90,8 +90,9 @@ public class MemberDAOImpl implements MemberDAO {
 		System.out.println("====ID:"+m.getPass());
 		MemberBean mem = null;
 		try {
+			
 			ResultSet rs = DataBaseFactory.create(Vendor.ORACLE).getConnection().createStatement().
-					executeQuery((String.format(DMLEnum.TUPLE_SERCH.toString(), m.getId(),m.getPass())));
+					executeQuery((String.format(DMLEnum.TUPLE_SERCH.toString(), InitCommand.cmd.getData(),m.getId())));
 					
 			while(rs.next()) {
 				mem = new MemberBean();
@@ -142,5 +143,18 @@ public class MemberDAOImpl implements MemberDAO {
 		MemberBean m = null;
 		System.out.println("========member D: move out======");
 		return member;
+	}
+
+	@Override
+	public void changePass(MemberBean member) {
+		try {
+			DataBaseFactory.create(Vendor.ORACLE).getConnection().
+			createStatement().executeUpdate(String.format(DMLEnum.TUPLE_UPDATE_PASS.toString(), InitCommand.cmd.getData(),member.getId()));
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
 	}
 }

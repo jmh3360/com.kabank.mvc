@@ -22,6 +22,13 @@ public enum DMLEnum {
 		}
 		
 	},
+	TUPLE_UPDATE_PASS{
+		@Override
+		public String toString() {
+			
+			return "UPDATE MEMBER SET PASS = '%s' where id = '%s'";
+		}
+	},
 	ASTER{
 		@Override
 		public String toString() {

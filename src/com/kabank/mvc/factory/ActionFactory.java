@@ -11,6 +11,7 @@ public class ActionFactory {
 		switch (x) {
 		case "move":action= Action.MOVE;break;
 		case "login":action= Action.LOGIN;break;
+		case "update_pass" :action = Action.UPDATE_PASS; break;
 		default:
 			action=Action.MOVE;
 			break;

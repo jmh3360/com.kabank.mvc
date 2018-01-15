@@ -9,4 +9,5 @@ public interface MemberDAO {
 	public void memberJoin(MemberBean bean);
 	public MemberBean selectMemberById(MemberBean m);
 	public MemberBean login();
+	public void changePass(MemberBean member);
 }
