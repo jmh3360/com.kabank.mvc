@@ -36,5 +36,14 @@ public class MemberServiceImpl implements MemberService{
 		MemberDAOImpl.getInstance().changePass(member);
 	}
 
+	public void deleteMyId() {
+		MemberDAOImpl.getInstance().deleteMyId();
+	}
+
+	public void newMember() {
+		MemberDAOImpl.getInstance().newMember();
+		
+	}
+
 
 }

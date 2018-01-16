@@ -12,6 +12,8 @@ public class ActionFactory {
 		case "move":action= Action.MOVE;break;
 		case "login":action= Action.LOGIN;break;
 		case "update_pass" :action = Action.UPDATE_PASS; break;
+		case "delete" : action = Action.DELETE; break;
+		case "join" : action = Action.JOIN;break;
 		default:
 			action=Action.MOVE;
 			break;

@@ -26,6 +26,8 @@
 					<select name = table_name>
 						<option  value ="member" >회원 테이블</option>
 						<option  value="attend">출석 테이블</option>
+						<option  value="bank">뱅크 테이블</option>
+						
 					</select>
 					<input type="text" placeholder="생성할 테이블 명" />
 					<button id ="create_table_btn">생성</button>

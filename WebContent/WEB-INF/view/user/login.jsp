@@ -64,8 +64,7 @@
 </html>
 <script> 
 document.querySelector('#go_join_link').addEventListener("click",function() {
-	location.href = "${ctx}/user.do?cmd=join";},false);
-/* 	location.href = "${ctx}/user/join.do";},false); */
+	location.href = "${ctx}/user.do?dir=user&page=join";},false);
 
 document.querySelector('#go_admin_link').addEventListener("click",function() {
 	location.href = "${ctx}/admin/main.do"},false);

@@ -35,5 +35,17 @@ public enum DDLEnum {
 				+")";
 	}
 		
+	},
+		CREATE_TABLE_BANK{
+		@Override
+		public String toString() {
+			// TODO Auto-generated method stub
+			return "CREATE TABLE Bank("
+					+ "customNum VARCHAR2(20) PRIMARY KEY,"
+					+ "accountNum VARCHAR2(20),"
+					+ "money VARCHAR2(20),"
+					+ "id VARCHAR2(20),"
+					+ "FOREIGN KEY (id) REFERENCES member(id) ON DELETE CASCADE)";
+		}
 	}
 }

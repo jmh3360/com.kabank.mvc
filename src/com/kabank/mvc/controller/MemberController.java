@@ -11,8 +11,10 @@ import javax.servlet.http.HttpSession;
 
 import com.kabank.mvc.command.ChangeCommand;
 import com.kabank.mvc.command.Command;
+import com.kabank.mvc.command.DeleteCommand;
 import com.kabank.mvc.command.InitCommand;
 import com.kabank.mvc.command.MoveCommand;
+import com.kabank.mvc.command.NewMemeber;
 import com.kabank.mvc.command.SearchCommand;
 import com.kabank.mvc.domain.MemberBean;
 import com.kabank.mvc.enums.Action;
@@ -20,6 +22,7 @@ import com.kabank.mvc.factory.ActionFactory;
 import com.kabank.mvc.service.MemberService;
 import com.kabank.mvc.serviceimpl.MemberServiceImpl;
 import com.kabank.mvc.util.DispatcherSelvlet;
+import com.sun.xml.internal.ws.server.ServiceDefinitionImpl;
 
 import javafx.scene.control.Alert;
 
@@ -71,6 +74,10 @@ public class MemberController extends HttpServlet {
 			}
 			
 			break;
+		case DELETE :
+			System.out.println("================delete in==============");
+			delete(request, response, session);
+			System.out.println("============delete out=====================");
 		case ADD:
 			System.out.println("========member : ADD======");
 			break;
@@ -84,20 +91,28 @@ public class MemberController extends HttpServlet {
 			System.out.println("========member : join======");
 			System.out.println("생년월일:" + request.getParameter("input_ssn" + "ssn2"));
 			System.out.println("전화번호: " + request.getParameter("phone1" + "phone2" + "phone3"));
-			member = new MemberBean();
-			member.setId(request.getParameter("input_id"));
-			member.setPass(request.getParameter("input_pass"));
-			member.setName(request.getParameter("input_name"));
-			member.setSsn(request.getParameter("input_ssn")+request.getParameter("ssn2"));
-			member.setEmail(request.getParameter("input_email"));
-			member.setAddr(request.getParameter("input_addr"));
-			member.setPhone
-			(request.getParameter("phone1")+request.getParameter("phone2")+request.getParameter("phone3"));
+			new NewMemeber(request).execute();
+			MemberServiceImpl.getInstance().newMember();
+			move(request);
+			DispatcherSelvlet.send(request, response);
+			System.out.println("DEST IS" + InitCommand.cmd.getView());
+			
 			break;
 		default:
 			break;
 		}
 		
+	}
+
+	private void delete(HttpServletRequest request, HttpServletResponse response, HttpSession session)
+			throws ServletException, IOException {
+		new DeleteCommand(request).execute(); 
+		MemberServiceImpl.getInstance().deleteMyId();
+		System.out.println("DAOIMPL의 DeleteMyid?"+InitCommand.cmd.getData());
+		System.out.println("DEST IS" + InitCommand.cmd.getView());
+		session.invalidate();
+		move(request);
+		DispatcherSelvlet.send(request, response);
 	}
 
 	private void move(HttpServletRequest request) {

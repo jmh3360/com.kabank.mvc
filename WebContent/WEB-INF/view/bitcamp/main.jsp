@@ -96,6 +96,8 @@
 	<input name ="id" value="jmh3360" type="hidden"  />
 	</form>
 	<button id ="bitcamp_passupdate_btn" >비밀번호 변경</button>
+	<button id ="bitcamp_delete_btn" >회원 삭제</button>
+
 </section>
 </div>
 <aside> </aside>
@@ -103,7 +105,10 @@
 </body>
 <script>
 	document.querySelector("#bitcamp_passupdate_btn").addEventListener('click',function(){
-		alert("난 자바가 좋아");
+		alert("비밀번호 변경하시겠습니까?");
 		location.href = "${ctx}/user.do?cmd=move&dir=bitcamp&page=update_pass"},false);
-	</script>
 	
+	document.querySelector('#bitcamp_delete_btn').addEventListener('click',function(){
+		alert('정말 삭제할겁니까?'); 
+		location.href = "${ctx}/user.do?cmd=delete"},false);
+	</script>

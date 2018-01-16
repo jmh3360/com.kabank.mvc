@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.*" %>
 
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/member.css" />
+<link rel="stylesheet" href="${ctx}/resources/css/member.css" />
 <body>
 <%@ include file="../common/header.jsp"%>
 <section>
@@ -12,7 +12,7 @@
 </article>
 </section>
 <aside></aside>
-<form id = "join_form" action="${pageContext.request.contextPath}/user/memberjoin.do;"> <!-- 위치 경로를 servlet으로 보내고 
+<form id = "join_form" action="${ctx}/user.do;"> <!-- 위치 경로를 servlet으로 보내고 
 servlet에서 경로를 지정하여 이동한다.!!  -->
 <table id="member_table">
 
@@ -90,8 +90,9 @@ servlet에서 경로를 지정하여 이동한다.!!  -->
 	</tr>
 	
 	
-	<tr><td colspan="3" style="text-align: center;" > <button id="join_confirm_btn" name="join_confirm_btn">회원가입</button></td></tr>
-	
+	<tr><td colspan="3" style="text-align: center;" > <button id="join_confirm_btn" name="join_confirm_btn">회원가입</button>
+	<input type="hidden" name = "cmd" value="join" />
+	</td></tr>
 </table>
 
 

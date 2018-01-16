@@ -23,10 +23,6 @@ public class AdminController extends HttpServlet {
 			throws ServletException, IOException {
 		String dir = request.getServletPath().split(PathEnum.SEPARATOR.toString())[1];
 		String dest = request.getServletPath().split(PathEnum.SEPARATOR.toString())[2].split(PathEnum.DOT.toString())[0];
-		
-		
-		
-		
 		switch (dest) {
 		case "create_table":
 				dir = "admin";

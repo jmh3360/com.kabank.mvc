@@ -24,11 +24,12 @@ public class AdminDAOImpl implements AdminDAO {
 		Statement stmt = null;
 		try {
 			StringBuffer buffer = new StringBuffer(DMLEnum.SELECT.toString());
-			Class.forName(OracleEnum.ORACLE_DRIVER.toString());
-			conn = DriverManager.getConnection(OracleEnum.ORACLE_CONNECITON_URL.toString(),
-					OracleEnum.ORACLE_USERNAME.toString(),OracleEnum.ORACLE_PASSWORD.toString());
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe",
+					"bitcamp","bitcamp");
 			stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(buffer.insert(6," " + DMLEnum.ASTER).append(DMLEnum.TAB).toString());
+			
 			while(rs.next()) {
 				String temp = rs.getString("TNAME");
 				list.add(temp);
@@ -48,6 +49,9 @@ public class AdminDAOImpl implements AdminDAO {
 				}else if(tname.equalsIgnoreCase("attend")) {
 					stmt.executeUpdate(DDLEnum.CREATE_TABLE_ATTEND.toString());
 					System.out.println("출석 생성");
+				}else if(tname.equalsIgnoreCase("bank")) {
+					System.out.println("bank위치");
+					stmt.executeUpdate(DDLEnum.CREATE_TABLE_BANK.toString());
 					
 				}
 			}

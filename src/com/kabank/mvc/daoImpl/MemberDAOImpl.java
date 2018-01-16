@@ -113,6 +113,19 @@ public class MemberDAOImpl implements MemberDAO {
 		return mem;
 	}
 
+
+	@Override
+	public void changePass(MemberBean member) {
+		try {
+			DataBaseFactory.create(Vendor.ORACLE).getConnection().
+			createStatement().executeUpdate(String.format(DMLEnum.TUPLE_UPDATE_PASS.toString(), InitCommand.cmd.getData(),member.getId()));
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+	}
 	@Override
 	public MemberBean login() {
 		System.out.println("========member D: move IN======");
@@ -145,16 +158,46 @@ public class MemberDAOImpl implements MemberDAO {
 		return member;
 	}
 
+	
 	@Override
-	public void changePass(MemberBean member) {
+	public void deleteMyId() {
+		StringBuffer sql = new StringBuffer(DMLEnum.TUPLE_DELETE_MYID.toString());
+		System.out.println("DAOIMPL의 DeleteMyid?"+InitCommand.cmd.getData());
+		sql.replace(sql.indexOf("@"), sql.indexOf("@")+1, InitCommand.cmd.getData());
+		System.out.println(":::SQL:::"+sql.toString());
 		try {
-			DataBaseFactory.create(Vendor.ORACLE).getConnection().
-			createStatement().executeUpdate(String.format(DMLEnum.TUPLE_UPDATE_PASS.toString(), InitCommand.cmd.getData(),member.getId()));
-			
+			DataBaseFactory.create(Vendor.ORACLE).getConnection().createStatement().executeUpdate(sql.toString());
 		} catch (Exception e) {
+			
 			e.printStackTrace();
 		}
 		
+	}
+
+	@Override
+	public void newMember() {
+		System.out.println("newMember id 값" + InitCommand.cmd.getCmap().get("input_id"));
+		System.out.println
+		(InitCommand.cmd.getCmap().get("input_ssn").toString().concat("-").concat(InitCommand.cmd.getCmap().get("input_ssn2").toString()));
+		
+		try {
+			DataBaseFactory.create(Vendor.ORACLE).getConnection().createStatement().executeUpdate(String.format(DMLEnum.INSERT_MEMBER.toString(),
+					
+					InitCommand.cmd.getCmap().get("input_id"),
+					InitCommand.cmd.getCmap().get("input_pass"),
+					InitCommand.cmd.getCmap().get("input_name"),
+					InitCommand.cmd.getCmap().get("input_ssn").toString().
+					concat("-").concat(InitCommand.cmd.getCmap().get("input_ssn2").toString()),
+					InitCommand.cmd.getCmap().get("phone1")+"-"+InitCommand.cmd.getCmap().get("phone2")
+				    +"-"+InitCommand.cmd.getCmap().get("phone3"),
+					InitCommand.cmd.getCmap().get("input_email"),
+					"",
+					InitCommand.cmd.getCmap().get("input_addr")));
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 }
