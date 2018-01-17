@@ -1,7 +1,8 @@
 package com.kabank.mvc.enums;
 
 public enum MemberEnum {
-	ID, PASS, NAME, SSN, PHONE, EMAIL, PROFILE, ADDR,
+	ID, PASS, NAME, SSN, PHONE, EMAIL, PROFILE, ADDR
+	/*
 	PROPERTIES{
 		@Override
 		public String toString() {
@@ -15,6 +16,6 @@ public enum MemberEnum {
 				return "SELECT ID, PASS, NAME, SSN, PHONE, EMAIL, ADDR, PROFILE FROM Member "
 						+ " WHERE id LIKE '$' AND pass LIKE '@'";
 			}
-		}
+		}*/
 	}
 

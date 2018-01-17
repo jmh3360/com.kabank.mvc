@@ -1,3 +1,16 @@
+drop sequence <!-- 시퀀스 명을 잘못 입력하였을 때 쓴다.  -->
+create sequence customer_num start with 1000;<!-- tuple생성시 마다 1씩 증가하게  -->
+create table kakao(
+	customer_num number primary key,
+	account_num varchar2(20) not null,
+	money varchar2(20) default 0,
+	id varchar2(20),
+	foreign key id references Member(id)
+	on delete cascade );
+	
+	insert into kakao(customer_num,account_num,money,id)
+	values(customer_num.nextval,'65465433','0',3)
+
 select * from member;
 select * from bank;
 select * from tab;

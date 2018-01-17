@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.kabank.mvc.command.InitCommand;
 import com.kabank.mvc.dao.MemberDAO;
+import com.kabank.mvc.decorate.ExecuteQuery;
 import com.kabank.mvc.domain.MemberBean;
 import com.kabank.mvc.enums.DMLEnum;
 import com.kabank.mvc.enums.MemberEnum;
@@ -13,6 +14,8 @@ import com.kabank.mvc.enums.Vendor;
 import com.kabank.mvc.factory.DataBaseFactory;
 import com.kabank.mvc.factory.Oracle;
 import com.kabank.mvc.factory.SqlFactory;
+import com.kabank.mvc.query.member.DeleteMemberQuery;
+import com.kabank.mvc.query.member.LoginQuery;
 import com.kabank.mvc.util.Enums;
 
 public class MemberDAOImpl implements MemberDAO {
@@ -128,7 +131,8 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 	@Override
 	public MemberBean login() {
-		System.out.println("========member D: move IN======");
+		System.out.println("MEMBER login으로 들어옴");
+		/*System.out.println("========member D: move IN======");
 		StringBuffer sql = new StringBuffer(
 				MemberEnum.LOGIN.toString());
 		String[] arr = InitCommand.cmd.getData().split("/");
@@ -154,14 +158,14 @@ public class MemberDAOImpl implements MemberDAO {
 			e.printStackTrace();
 		}
 		MemberBean m = null;
-		System.out.println("========member D: move out======");
-		return member;
+		System.out.println("========member D: move out======");*/
+		return (MemberBean) new ExecuteQuery(new LoginQuery()).execute();
 	}
 
 	
 	@Override
 	public void deleteMyId() {
-		StringBuffer sql = new StringBuffer(DMLEnum.TUPLE_DELETE_MYID.toString());
+		/*StringBuffer sql = new StringBuffer(DMLEnum.TUPLE_DELETE_MYID.toString());
 		System.out.println("DAOIMPL의 DeleteMyid?"+InitCommand.cmd.getData());
 		sql.replace(sql.indexOf("@"), sql.indexOf("@")+1, InitCommand.cmd.getData());
 		System.out.println(":::SQL:::"+sql.toString());
@@ -170,7 +174,8 @@ public class MemberDAOImpl implements MemberDAO {
 		} catch (Exception e) {
 			
 			e.printStackTrace();
-		}
+		}*/
+		new ExecuteQuery(new DeleteMemberQuery()).execute();
 		
 	}
 

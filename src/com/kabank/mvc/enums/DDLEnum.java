@@ -1,6 +1,7 @@
 package com.kabank.mvc.enums;
 
 public enum DDLEnum {
+	INSERT,INTO,SELECT,WHERE,AND,FROM,VALUES,DELETE,
 	
 	CREATE_TABLE_MEMBER{
 		@Override

@@ -5,7 +5,7 @@
 <div id ="wrapper">
 <h2> 비트 캠프 메인</h2>
 <section>
-	<form id = "bitcamp_form" action="result.jsp">
+
 
 <table id="mypage_table">
 <tr>
@@ -34,16 +34,19 @@
 	<td>${sessionScope.user.addr}</td>
 </tr>
 <tr><td>회원번호</td><td></td><td>계좌번호</td><td></td></tr>
-<tr><td colspan="5"><button>수정</button><button>탈퇴</button></td></tr>
+<tr><td colspan="5"><button>수정</button><button id ="bye">탈퇴</button></td></tr>
 </table>
 
-</form>
+
 </section>
 </div>
 <%@ include file="../common/footer.jsp"%>
 </body>
 <script>
 document.querySelector('#kakao').addEventListener('click',function(){
-	location.href = "${ctx}/user.do?cmd=move&dir=kakao&page=main";
-},false);
+	location.href = "${ctx}/user.do?cmd=move&dir=kakao&page=main";},false);
+
+document.querySelector('#bye').addEventListener('click',function(){
+	alert('정말 삭제할겁니까?'); 
+	location.href = "${ctx}/user.do?cmd=delete";},false);
 </script>

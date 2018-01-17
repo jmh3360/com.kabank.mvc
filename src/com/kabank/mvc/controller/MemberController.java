@@ -38,7 +38,7 @@ public class MemberController extends HttpServlet {
 		HttpSession session = request.getSession();
 		InitCommand init = new InitCommand(request);
 		init.execute();
-		
+		System.out.println("액션값: "+ InitCommand.cmd.getAction());
 		switch (InitCommand.cmd.getAction())/*initcommand.cmd.getAction() 
 		cmd를 initcommand의 static변수로 만들어서 사용한다. 하지만 많이 만들면 안됨 전체에서 공통적으로 사용하는
 		것들만 사용한다  */{
@@ -124,11 +124,14 @@ public class MemberController extends HttpServlet {
 		
 		MemberBean member = MemberServiceImpl.getInstance().login();
 		System.out.println("memeberD 끝");
+		
 		if(member==null) {
+			System.out.println("멤버가 널이야");
 			InitCommand.cmd.setDir("user");
 			InitCommand.cmd.setPage("login");
 		}else {
 			session.setAttribute("user", member);
+			System.out.println("나와라"+((MemberBean)session.getAttribute("user")).toString());
 			InitCommand.cmd.setDir("bitcamp");
 			InitCommand.cmd.setPage("main");
 		}

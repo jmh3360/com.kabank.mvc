@@ -28,7 +28,7 @@
 document.querySelector('#create_passBook').addEventListener("click",function(){
 	alert("통장개설")
 	location.href = "${ctx}/kakao.do?cmd=bank_book&dir=user&mypage"
-	
 },false);
+
 </script>
 </html>

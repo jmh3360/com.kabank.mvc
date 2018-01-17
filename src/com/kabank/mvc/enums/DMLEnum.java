@@ -58,5 +58,5 @@ public enum DMLEnum {
 			// TODO Auto-generated method stub
 			return "*";
 		}
-	}
+	}, FROM, WHERE
 }

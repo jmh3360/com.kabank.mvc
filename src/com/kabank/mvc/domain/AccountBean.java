@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class AccountBean {
-	private String accountNum,money;
+	private String accountNum,money,customerNum;
 
 	
 }

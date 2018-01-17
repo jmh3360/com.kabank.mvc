@@ -1,5 +1,5 @@
 package com.kabank.mvc.enums;
 
-public enum DmEnum {
+public enum MemberProps {
 
 }
