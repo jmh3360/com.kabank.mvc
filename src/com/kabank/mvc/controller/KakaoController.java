@@ -10,11 +10,18 @@ import javax.servlet.http.HttpSession;
 
 import com.kabank.mvc.command.CreateCommand;
 import com.kabank.mvc.command.InitCommand;
+import com.kabank.mvc.command.MoveCommand;
+import com.kabank.mvc.serviceimpl.AccountServiceImpl;
+import com.kabank.mvc.util.DispatcherSelvlet;
 
 @WebServlet("/kakao.do")
 public class KakaoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+       private int i;
        
+       public KakaoController() {
+		i = 1001;
+	}
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		System.out.println("===========서블렛 내부 진입 for kakao==========="+request.getServletPath());
@@ -23,8 +30,13 @@ public class KakaoController extends HttpServlet {
 		init.execute();
 		switch (InitCommand.cmd.getAction()) {
 		case BANK_BOOK:
-			new CreateCommand(request).execute();
 			
+			System.out.println("======kakaoController BANK_BOOK IN=======");
+			new CreateCommand(request).execute();
+			AccountServiceImpl.getInstance().createBankBook(String.valueOf(i++));
+			
+			new MoveCommand(request).execute();
+			DispatcherSelvlet.send(request, response);
 			
 			break;
 

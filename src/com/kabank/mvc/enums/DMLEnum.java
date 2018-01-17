@@ -44,6 +44,14 @@ public enum DMLEnum {
 					+ "'%s','%s','%s','%s','%s','%s','%s')";
 		}
 	},
+	CREATE_BANKBOOK{
+		@Override
+		public String toString() {
+			// TODO Auto-generated method stub
+			return "INSERT INTO Bank(customnum,accountnum,money,id) VALUES("
+					+ "'%s','%s','%s','%s')";
+		}
+	},
 	ASTER{
 		@Override
 		public String toString() {

@@ -4,18 +4,19 @@ import com.kabank.mvc.enums.Action;
 
 public class ActionFactory {
 	public static Action create(String x) {
-		System.out.println("x의 경로" + x);
+		System.out.println("action 탐");
 		Action action = null;
 		if(x==null || x.equals("") == true) {x="move";}
-		System.out.println("Action FACTORY x(move)의값" +x);
 		switch (x) {
 		case "move":action= Action.MOVE;break;
 		case "login":action= Action.LOGIN;break;
 		case "update_pass" :action = Action.UPDATE_PASS; break;
 		case "delete" : action = Action.DELETE; break;
 		case "join" : action = Action.JOIN;break;
-		case "bank_book": action = Action.BANK_BOOK;break;
-		default:
+		case "bank_book": action = Action.BANK_BOOK;
+		
+		break;
+				default:
 			action=Action.MOVE;
 			break;
 		}

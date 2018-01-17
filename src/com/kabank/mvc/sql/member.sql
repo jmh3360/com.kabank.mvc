@@ -1,7 +1,7 @@
 select * from member;
 select * from bank;
 select * from tab;
-delete from member whwere id ='%s';
+delete from bank whwere id ='3';
 desc member;
 update member set name = '김만호' where id = 'jmh3360';
 
