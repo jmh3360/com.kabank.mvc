@@ -41,8 +41,7 @@
 						<td >
 						<input id="index_input_pass" name="pass" placeholder = "비밀번호" tabindex="2" value="123" />
 						<input type="hidden" name="cmd" value="login" />
-						<input type="hidden" name="dir" value="bitcamp" />
-						<input type="hidden" name="page" value="main" />
+						<input type="hidden" name="page" value="mypage" />
 						
 						</td>
 					</tr>

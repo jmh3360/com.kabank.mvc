@@ -14,7 +14,7 @@ import com.kabank.mvc.command.Command;
 import com.kabank.mvc.command.DeleteCommand;
 import com.kabank.mvc.command.InitCommand;
 import com.kabank.mvc.command.MoveCommand;
-import com.kabank.mvc.command.NewMemeber;
+import com.kabank.mvc.command.CreateCommand;
 import com.kabank.mvc.command.SearchCommand;
 import com.kabank.mvc.domain.MemberBean;
 import com.kabank.mvc.enums.Action;
@@ -91,7 +91,7 @@ public class MemberController extends HttpServlet {
 			System.out.println("========member : join======");
 			System.out.println("생년월일:" + request.getParameter("input_ssn" + "ssn2"));
 			System.out.println("전화번호: " + request.getParameter("phone1" + "phone2" + "phone3"));
-			new NewMemeber(request).execute();
+			new CreateCommand(request).execute();
 			MemberServiceImpl.getInstance().newMember();
 			move(request);
 			DispatcherSelvlet.send(request, response);

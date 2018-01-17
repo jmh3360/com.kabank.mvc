@@ -1,4 +1,5 @@
 select * from member;
+select * from bank;
 select * from tab;
 delete from member whwere id ='%s';
 desc member;

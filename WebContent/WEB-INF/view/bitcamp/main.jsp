@@ -111,4 +111,8 @@
 	document.querySelector('#bitcamp_delete_btn').addEventListener('click',function(){
 		alert('정말 삭제할겁니까?'); 
 		location.href = "${ctx}/user.do?cmd=delete"},false);
+	
+	document.querySelector('#kakao').addEventListener('click',function(){
+		location.href = "${ctx}/user.do?cmd=move&dir=kakao&page=main";
+	},false);
 	</script>

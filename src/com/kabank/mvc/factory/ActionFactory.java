@@ -14,6 +14,7 @@ public class ActionFactory {
 		case "update_pass" :action = Action.UPDATE_PASS; break;
 		case "delete" : action = Action.DELETE; break;
 		case "join" : action = Action.JOIN;break;
+		case "bank_book": action = Action.BANK_BOOK;break;
 		default:
 			action=Action.MOVE;
 			break;
