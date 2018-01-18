@@ -21,9 +21,9 @@ public class AccountDAOImpl implements AccountDAO {
 		System.out.println("arr 값: "+arr);
 		try {
 			DataBaseFactory.create(Vendor.ORACLE).getConnection().createStatement().executeUpdate(String.format(DMLEnum.CREATE_BANKBOOK.toString(), 
+					"customer_num.nextval",
 					arr[1],
-					arr[0],
-					arr[2]+"원",
+					"0",
 					InitCommand.cmd.getData()));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

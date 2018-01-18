@@ -7,6 +7,7 @@ import java.util.List;
 import com.kabank.mvc.command.InitCommand;
 import com.kabank.mvc.dao.MemberDAO;
 import com.kabank.mvc.decorate.ExecuteQuery;
+import com.kabank.mvc.decorate.ExecuteUpdate;
 import com.kabank.mvc.domain.MemberBean;
 import com.kabank.mvc.enums.DMLEnum;
 import com.kabank.mvc.enums.MemberEnum;
@@ -15,6 +16,7 @@ import com.kabank.mvc.factory.DataBaseFactory;
 import com.kabank.mvc.factory.Oracle;
 import com.kabank.mvc.factory.SqlFactory;
 import com.kabank.mvc.query.member.DeleteMemberQuery;
+import com.kabank.mvc.query.member.FindAccountByIdQuery;
 import com.kabank.mvc.query.member.LoginQuery;
 import com.kabank.mvc.util.Enums;
 
@@ -160,6 +162,7 @@ public class MemberDAOImpl implements MemberDAO {
 		MemberBean m = null;
 		System.out.println("========member D: move out======");*/
 		return (MemberBean) new ExecuteQuery(new LoginQuery()).execute();
+				
 	}
 
 	
@@ -204,5 +207,11 @@ public class MemberDAOImpl implements MemberDAO {
 			e.printStackTrace();
 		}
 		
+	}
+
+	@Override
+	public MemberBean findAccountById(String id) {
+		
+		return (MemberBean) new ExecuteUpdate(new FindAccountByIdQuery()).execute();
 	}
 }

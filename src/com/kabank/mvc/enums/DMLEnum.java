@@ -48,8 +48,8 @@ public enum DMLEnum {
 		@Override
 		public String toString() {
 			// TODO Auto-generated method stub
-			return "INSERT INTO Bank(customnum,accountnum,money,id) VALUES("
-					+ "'%s','%s','%s','%s')";
+			return "INSERT INTO Bank(customer_num,account_num,money,id) VALUES("
+					+ "%s,'%s','%s','%s')";
 		}
 	},
 	ASTER{
@@ -58,5 +58,11 @@ public enum DMLEnum {
 			// TODO Auto-generated method stub
 			return "*";
 		}
-	}, FROM, WHERE
+	}, FROM, WHERE,
+	CREATE_PHONE{
+		@Override
+		public String toString() {
+			return "INSERT INTO Telecom(customer_num,regdate,num,id) values (%s,'%s','%s','%s')";
+		}
+	}
 }

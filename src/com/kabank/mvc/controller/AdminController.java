@@ -27,9 +27,8 @@ public class AdminController extends HttpServlet {
 		case "create_table":
 				dir = "admin";
 				dest = "main";
-				AdminService service = new AdminServiceImpl();
 				System.out.println("controller" + request.getParameter("table_name"));
-				service.createTable(request.getParameter("table_name"));
+				AdminServiceImpl.getInstance().createTable(request.getParameter("table_name"));
 			break;
 		case  "member_list" :
 			dir = "admin";

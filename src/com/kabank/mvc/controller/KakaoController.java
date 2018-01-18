@@ -34,7 +34,6 @@ public class KakaoController extends HttpServlet {
 			
 			System.out.println("======kakaoController BANK_BOOK IN=======");
 			new CreateCommand(request).execute();
-			InitCommand.cmd.setData(((MemberBean)request.getAttribute("user")).getId());
 			/*위의 방식을 사용하면 command patten을 사용할 필요가 없다.*/
 			AccountServiceImpl.getInstance().createBankBook(String.valueOf(i++));
 			

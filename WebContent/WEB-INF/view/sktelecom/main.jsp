@@ -5,12 +5,27 @@
 <section>
 <article>
 <div id="wrapper">
-<h1> 에케메인</h1>
+<h2> 에케메인</h2>
+<table>
+	<tr>
+		<td colspan="3"><button id ="sktelecom-open" >개통</button></td>
+	</tr>
+	<tr>
+		<td><button></button></td>
+		<td><button></button></td>
+		<td><button></button></td>
+	</tr>
+</table>
+
 </div>
 </article>
 </section>
 <aside></aside>
 <%@ include file="../common/footer.jsp"%>
 </body>
-<script src="../../js/sktelecom/sktelecom.js"></script>
+<script >
+document.querySelector('#sktelecom-open').addEventListener('click',function(){
+	location.href = "${ctx}/telecom.do?cmd=open&dir=user&page=mypage"
+},false);
+</script>
 </html>

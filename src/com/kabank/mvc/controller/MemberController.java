@@ -16,10 +16,12 @@ import com.kabank.mvc.command.InitCommand;
 import com.kabank.mvc.command.MoveCommand;
 import com.kabank.mvc.command.CreateCommand;
 import com.kabank.mvc.command.SearchCommand;
+import com.kabank.mvc.domain.AccountBean;
 import com.kabank.mvc.domain.MemberBean;
 import com.kabank.mvc.enums.Action;
 import com.kabank.mvc.factory.ActionFactory;
 import com.kabank.mvc.service.MemberService;
+import com.kabank.mvc.serviceimpl.AccountServiceImpl;
 import com.kabank.mvc.serviceimpl.MemberServiceImpl;
 import com.kabank.mvc.util.DispatcherSelvlet;
 import com.sun.xml.internal.ws.server.ServiceDefinitionImpl;
@@ -130,7 +132,15 @@ public class MemberController extends HttpServlet {
 			InitCommand.cmd.setDir("user");
 			InitCommand.cmd.setPage("login");
 		}else {
-			session.setAttribute("user", member);
+			System.out.println("member Id는?" + member.getId());
+			InitCommand.cmd.setData(member.getId());
+			MemberBean memberWithAccount = AccountServiceImpl.getInstance().findAccountById(member.getId());
+			if(memberWithAccount == null) {
+				System.out.println("계좌가 없는 멤버");
+				session.setAttribute("user", member);
+				}else {
+					session.setAttribute("user", memberWithAccount);
+				}
 			System.out.println("나와라"+((MemberBean)session.getAttribute("user")).toString());
 			InitCommand.cmd.setDir("bitcamp");
 			InitCommand.cmd.setPage("main");

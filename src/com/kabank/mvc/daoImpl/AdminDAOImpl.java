@@ -16,6 +16,11 @@ import java.util.*;
 
 public class AdminDAOImpl implements AdminDAO {
 
+	public static AdminDAO getInstance() {
+		return new AdminDAOImpl();
+	}
+	private AdminDAOImpl() {}
+	
 	@Override
 	public List<String> createTable(String tname) {
 		System.out.println("DAOIMPL cratetable()tname : "+tname);
@@ -23,13 +28,9 @@ public class AdminDAOImpl implements AdminDAO {
 		Connection conn = null;
 		Statement stmt = null;
 		try {
-			StringBuffer buffer = new StringBuffer(DMLEnum.SELECT.toString());
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe",
-					"bitcamp","bitcamp");
-			stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery(buffer.insert(6," " + DMLEnum.ASTER).append(DMLEnum.TAB).toString());
-			
+			ResultSet rs =DataBaseFactory.create(Vendor.ORACLE).getConnection().createStatement().
+			executeQuery((new StringBuffer(DMLEnum.SELECT.toString()).insert(6, " " + DMLEnum.ASTER).append(DMLEnum.TAB).toString()));
+			stmt = DataBaseFactory.create(Vendor.ORACLE).getConnection().createStatement();
 			while(rs.next()) {
 				String temp = rs.getString("TNAME");
 				list.add(temp);
@@ -52,6 +53,9 @@ public class AdminDAOImpl implements AdminDAO {
 				}else if(tname.equalsIgnoreCase("bank")) {
 					System.out.println("bank위치");
 					stmt.executeUpdate(DDLEnum.CREATE_TABLE_BANK.toString());
+				}else if(tname.equalsIgnoreCase("telecom")) {
+					System.out.println("telecom위치");
+					stmt.executeUpdate(DDLEnum.CREATE_TABLE_TELECOM.toString());
 					
 				}
 			}

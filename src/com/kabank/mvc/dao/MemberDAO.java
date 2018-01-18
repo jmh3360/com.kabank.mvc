@@ -12,4 +12,5 @@ public interface MemberDAO {
 	public void changePass(MemberBean member);
 	public void deleteMyId();
 	public void newMember();
+	public MemberBean findAccountById(String id);
 }

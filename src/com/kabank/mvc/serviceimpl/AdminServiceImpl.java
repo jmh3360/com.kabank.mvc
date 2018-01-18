@@ -7,15 +7,15 @@ import com.kabank.mvc.daoImpl.AdminDAOImpl;
 import com.kabank.mvc.service.AdminService;
 
 public class AdminServiceImpl implements AdminService {
-
-	AdminDAO dao;
-	public AdminServiceImpl() {
-		dao = new AdminDAOImpl();
+	
+	public static AdminService getInstance() {
+		return new AdminServiceImpl();
 	}
+	private AdminServiceImpl() {}
 	@Override
 	public void createTable(String tname) {
 		System.out.println("serviceimpl createtable() :"+tname);
-	dao.createTable(tname);
+	AdminDAOImpl.getInstance().createTable(tname);
 
 	}
 

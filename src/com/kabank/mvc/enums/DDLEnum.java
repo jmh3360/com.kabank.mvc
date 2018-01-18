@@ -40,13 +40,23 @@ public enum DDLEnum {
 		CREATE_TABLE_BANK{
 		@Override
 		public String toString() {
-			// TODO Auto-generated method stub
 			return "CREATE TABLE Bank("
-					+ "customNum VARCHAR2(20) PRIMARY KEY,"
-					+ "accountNum VARCHAR2(20),"
-					+ "money VARCHAR2(20),"
-					+ "id VARCHAR2(20),"
-					+ "FOREIGN KEY (id) REFERENCES member(id) ON DELETE CASCADE)";
+					+ "customer_num number primary key,"
+					+ "account_num varchar2(20) not null,"
+					+ "money varchar2(20) default 0,"
+					+ "id varchar2(20) "
+					+ "FOREIGN KEY (id) REFERENCES Member(id) ON DELETE CASCADE)";
+		}
+	},
+		CREATE_TABLE_TELECOM{
+		@Override
+		public String toString() {
+			return "CREATE TABLE Telecom("
+					+ "customer_num number primary key,"
+					+ "regdate date,"
+					+ "num varchar2(20),"
+					+ "id varchar2(20) "
+					+ "FOREIGN KEY (id) REFERENCES Member(id) ON DELETE CASCADE)";
 		}
 	}
 }

@@ -9,6 +9,7 @@
 
 <table id="mypage_table">
 <tr>
+	
 	<td rowspan="5"></td>
 	<td class="column">id</td>
 	<td>${sessionScope.user.id}</td>
@@ -33,7 +34,7 @@
 	<td class="column">주소</td>
 	<td>${sessionScope.user.addr}</td>
 </tr>
-<tr><td>회원번호</td><td></td><td>계좌번호</td><td></td></tr>
+<tr><td>회원번호</td><td>${sessionScope.user.account.customerNum}</td><td>계좌번호</td><td>${sessionScope.user.account.accountNum}</td></tr>
 <tr><td colspan="5"><button>수정</button><button id ="bye">탈퇴</button></td></tr>
 </table>
 
@@ -49,4 +50,5 @@ document.querySelector('#kakao').addEventListener('click',function(){
 document.querySelector('#bye').addEventListener('click',function(){
 	alert('정말 삭제할겁니까?'); 
 	location.href = "${ctx}/user.do?cmd=delete";},false);
+	
 </script>

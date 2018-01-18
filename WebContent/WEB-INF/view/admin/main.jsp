@@ -27,7 +27,7 @@
 						<option  value ="member" >회원 테이블</option>
 						<option  value="attend">출석 테이블</option>
 						<option  value="bank">뱅크 테이블</option>
-						
+						<option  value="telecom">telecom 테이블</option>
 					</select>
 					<input type="text" placeholder="생성할 테이블 명" />
 					<button id ="create_table_btn">생성</button>
@@ -43,11 +43,11 @@
 </html>
 <script>
 document.querySelector('#table_btn').addEventListener('click',function(){
-	location.href = "${pageContext.request.contextPath}/admin/member_list.do";
+	location.href = "${ctx}/admin/member_list.do";
 },false);
 
 document.querySelector('#create_table_btn').addEventListener("click",function(){
 	document.querySelector('#create_table').submit;
-},false;);
+},false);
 
 </script>

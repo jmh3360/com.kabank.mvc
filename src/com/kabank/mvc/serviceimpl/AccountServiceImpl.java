@@ -3,6 +3,9 @@ package com.kabank.mvc.serviceimpl;
 import java.util.*;
 
 import com.kabank.mvc.daoImpl.AccountDAOImpl;
+import com.kabank.mvc.daoImpl.MemberDAOImpl;
+import com.kabank.mvc.domain.AccountBean;
+import com.kabank.mvc.domain.MemberBean;
 import com.kabank.mvc.service.AccountService;
 
 public class AccountServiceImpl implements AccountService{
@@ -12,7 +15,7 @@ public class AccountServiceImpl implements AccountService{
 	private AccountServiceImpl() {}
 	public String[] createBankBook(String count) {
 		System.out.println("acoountSeviceImpl createBook");
-		String[] arr = new String[3];
+		String[] arr = new String[2];
 		arr[0] = String.valueOf(count);
 		Random r = new Random();
 		boolean flag = true;
@@ -21,7 +24,6 @@ public class AccountServiceImpl implements AccountService{
 			if(temp >100000) {
 				System.out.println("temp의 크기"+temp);
 				arr[1] = String.valueOf(temp);
-				arr[2] = String.valueOf(temp+1);
 				flag = false;
 			}
 		}
@@ -30,6 +32,9 @@ public class AccountServiceImpl implements AccountService{
 		return arr;
 		
 		
+	}
+	public MemberBean findAccountById(String id) {
+		return MemberDAOImpl.getInstance().findAccountById(id);
 	}
 	
 }
