@@ -18,8 +18,6 @@ public class CreateCommand implements IOrder {
 		map = ParamsIterator.execute(request);
 		 go = request.getServletPath();
 		session = request.getSession();
-		 System.out.println("어디서 만들래?" + go);
-		 System.out.println(session.getAttribute("user"));
 	}
 	@Override
 	public void execute() {
@@ -33,6 +31,12 @@ public class CreateCommand implements IOrder {
 		case "/user.do":
 			System.out.println("NewMemeber map?"+map);
 			InitCommand.cmd.setCmap(map);
+			break;
+		case "/telecom.do":
+			System.out.println("전달할 것  =="+InitCommand.cmd.getData());
+			InitCommand.cmd.setData(String.valueOf
+				("010-"+(int)(Math.random()* 8999 + 1000))+"-"+(int)(Math.random()* 8999 + 1000)
+				+"/"+((MemberBean) session.getAttribute("user")).getId());
 			break;
 		default:
 			break;

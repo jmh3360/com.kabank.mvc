@@ -53,9 +53,9 @@ public class AdminDAOImpl implements AdminDAO {
 				}else if(tname.equalsIgnoreCase("bank")) {
 					System.out.println("bank위치");
 					stmt.executeUpdate(DDLEnum.CREATE_TABLE_BANK.toString());
-				}else if(tname.equalsIgnoreCase("telecom")) {
-					System.out.println("telecom위치");
-					stmt.executeUpdate(DDLEnum.CREATE_TABLE_TELECOM.toString());
+				}else if(tname.equalsIgnoreCase("mobile")) {
+					System.out.println("mobile위치");
+					stmt.executeUpdate(DDLEnum.CREATE_TABLE_MOBILE.toString());
 					
 				}
 			}

@@ -17,7 +17,6 @@ public class DeleteMemberQuery implements IQuery {
 			pstmt = DataBaseFactory.create(Vendor.ORACLE).getConnection().prepareStatement(
 					DDL.DELETE+" "+DDL.FROM+" "+Table.MEMBER+" "+DDL.WHERE+" id=?");
 			pstmt.setString(1, InitCommand.cmd.getData());
-			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -25,8 +24,14 @@ public class DeleteMemberQuery implements IQuery {
 	}
 	@Override
 	public Object execute() {
-		// TODO Auto-generated method stub
-		return null;
+		String temp = "";
+		try {
+		temp =	String.valueOf(pstmt.executeUpdate());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return temp;
 	}
 
 }

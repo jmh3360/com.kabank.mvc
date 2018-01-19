@@ -3,6 +3,7 @@ package com.kabank.mvc.command;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import com.kabank.mvc.enums.Action;
 import com.kabank.mvc.iterator.ParamsIterator;
@@ -13,14 +14,17 @@ public class MoveCommand implements IOrder {
 	
 	Map<?, ?> map;
 	String servletPath;
-	
+	HttpSession session;
 	public MoveCommand(HttpServletRequest request) {
 		map = ParamsIterator.execute(request);
 		servletPath = request.getServletPath();
+		session = request.getSession();
+		
 	}
 	
 	@Override
 	public void execute() {
+		
 		String page = (String.valueOf(map.get("page")).equals("null")) ?
 						page = "login"
 						:

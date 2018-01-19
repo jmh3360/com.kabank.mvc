@@ -1,8 +1,6 @@
 package com.kabank.mvc.serviceimpl;
 
-import java.util.List;
 
-import com.kabank.mvc.dao.AdminDAO;
 import com.kabank.mvc.daoImpl.AdminDAOImpl;
 import com.kabank.mvc.service.AdminService;
 

@@ -8,15 +8,20 @@ import com.kabank.mvc.command.InitCommand;
 import com.kabank.mvc.dao.MemberDAO;
 import com.kabank.mvc.decorate.ExecuteQuery;
 import com.kabank.mvc.decorate.ExecuteUpdate;
+import com.kabank.mvc.domain.AccountBean;
 import com.kabank.mvc.domain.MemberBean;
+import com.kabank.mvc.domain.MobileBean;
 import com.kabank.mvc.enums.DMLEnum;
-import com.kabank.mvc.enums.MemberEnum;
+import com.kabank.mvc.enums.Member;
 import com.kabank.mvc.enums.Vendor;
 import com.kabank.mvc.factory.DataBaseFactory;
 import com.kabank.mvc.factory.Oracle;
 import com.kabank.mvc.factory.SqlFactory;
+import com.kabank.mvc.query.member.ChangePassQuery;
 import com.kabank.mvc.query.member.DeleteMemberQuery;
 import com.kabank.mvc.query.member.FindAccountByIdQuery;
+import com.kabank.mvc.query.member.FindMobileByIdQuery;
+import com.kabank.mvc.query.member.InsertMemberQuery;
 import com.kabank.mvc.query.member.LoginQuery;
 import com.kabank.mvc.util.Enums;
 
@@ -37,11 +42,11 @@ public class MemberDAOImpl implements MemberDAO {
 			StringBuffer buff = new StringBuffer(DMLEnum.SELECT.toString());
 			ResultSet rs =
 			DataBaseFactory.create(Vendor.ORACLE).getConnection().createStatement().
-			executeQuery(SqlFactory.create(6, " "+MemberEnum.ID.toString()+", "+MemberEnum.PASS.toString(),null));
+			executeQuery(SqlFactory.create(6, " "+Member.ID.toString()+", "+Member.PASS.toString(),null));
 			while(rs.next()) {
 				MemberBean m = new MemberBean();
-				id = rs.getString(MemberEnum.ID.toString());
-				pass = rs.getString(MemberEnum.PASS.toString());
+				id = rs.getString(Member.ID.toString());
+				pass = rs.getString(Member.PASS.toString());
 					m.setId(id);
 					m.setPass(pass);
 					list.add(m);
@@ -101,13 +106,13 @@ public class MemberDAOImpl implements MemberDAO {
 					
 			while(rs.next()) {
 				mem = new MemberBean();
-				mem.setId(rs.getString(MemberEnum.ID.toString()));
-				mem.setPass(rs.getString(MemberEnum.PASS.toString()));
-				mem.setName(rs.getString(MemberEnum.NAME.toString()));
-				mem.setSsn(rs.getString(MemberEnum.SSN.toString()));
-				mem.setPhone(rs.getString(MemberEnum.PHONE.toString()));
-				mem.setEmail(rs.getString(MemberEnum.EMAIL.toString()));
-				mem.setAddr(rs.getString(MemberEnum.ADDR.toString()));
+				mem.setId(rs.getString(Member.ID.toString()));
+				mem.setPass(rs.getString(Member.PASS.toString()));
+				mem.setName(rs.getString(Member.NAME.toString()));
+				mem.setSsn(rs.getString(Member.SSN.toString()));
+				mem.setPhone(rs.getString(Member.PHONE.toString()));
+				mem.setEmail(rs.getString(Member.EMAIL.toString()));
+				mem.setAddr(rs.getString(Member.ADDR.toString()));
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -121,46 +126,14 @@ public class MemberDAOImpl implements MemberDAO {
 
 	@Override
 	public void changePass(MemberBean member) {
-		try {
-			DataBaseFactory.create(Vendor.ORACLE).getConnection().
-			createStatement().executeUpdate(String.format(DMLEnum.TUPLE_UPDATE_PASS.toString(), InitCommand.cmd.getData(),member.getId()));
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		new ExecuteUpdate(new ChangePassQuery(member.getId())).execute();
+		
 		
 		
 	}
 	@Override
 	public MemberBean login() {
-		System.out.println("MEMBER login으로 들어옴");
-		/*System.out.println("========member D: move IN======");
-		StringBuffer sql = new StringBuffer(
-				MemberEnum.LOGIN.toString());
-		String[] arr = InitCommand.cmd.getData().split("/");
-		System.out.println("ID :" + arr[0]);
-		System.out.println("PASS :" +arr[1]);
-		sql.replace(sql.indexOf("$"), sql.indexOf("$")+1, arr[0]);
-		sql.replace(sql.indexOf("@"), sql.indexOf("@")+1, arr[1]);
-		System.out.println(":::SQL:::"+sql.toString());
-		MemberBean member = null;
-		try {
-			ResultSet rs = DataBaseFactory.create(Vendor.ORACLE).getConnection().createStatement().executeQuery(sql.toString());
-		while(rs.next()) {
-			member = new MemberBean();
-			member.setId(rs.getString(MemberEnum.ID.toString()));
-			member.setPass(rs.getString(MemberEnum.PASS.toString()));
-			member.setName(rs.getString(MemberEnum.NAME.toString()));
-			member.setSsn(rs.getString(MemberEnum.SSN.toString()));
-			member.setPhone(rs.getString(MemberEnum.PHONE.toString()));
-			member.setEmail(rs.getString(MemberEnum.EMAIL.toString()));
-			member.setAddr(rs.getString(MemberEnum.ADDR.toString()));
-		}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		MemberBean m = null;
-		System.out.println("========member D: move out======");*/
+		
 		return (MemberBean) new ExecuteQuery(new LoginQuery()).execute();
 				
 	}
@@ -168,50 +141,25 @@ public class MemberDAOImpl implements MemberDAO {
 	
 	@Override
 	public void deleteMyId() {
-		/*StringBuffer sql = new StringBuffer(DMLEnum.TUPLE_DELETE_MYID.toString());
-		System.out.println("DAOIMPL의 DeleteMyid?"+InitCommand.cmd.getData());
-		sql.replace(sql.indexOf("@"), sql.indexOf("@")+1, InitCommand.cmd.getData());
-		System.out.println(":::SQL:::"+sql.toString());
-		try {
-			DataBaseFactory.create(Vendor.ORACLE).getConnection().createStatement().executeUpdate(sql.toString());
-		} catch (Exception e) {
-			
-			e.printStackTrace();
-		}*/
 		new ExecuteQuery(new DeleteMemberQuery()).execute();
 		
 	}
 
 	@Override
 	public void newMember() {
-		System.out.println("newMember id 값" + InitCommand.cmd.getCmap().get("input_id"));
-		System.out.println
-		(InitCommand.cmd.getCmap().get("input_ssn").toString().concat("-").concat(InitCommand.cmd.getCmap().get("input_ssn2").toString()));
 		
-		try {
-			DataBaseFactory.create(Vendor.ORACLE).getConnection().createStatement().executeUpdate(String.format(DMLEnum.INSERT_MEMBER.toString(),
-					
-					InitCommand.cmd.getCmap().get("input_id"),
-					InitCommand.cmd.getCmap().get("input_pass"),
-					InitCommand.cmd.getCmap().get("input_name"),
-					InitCommand.cmd.getCmap().get("input_ssn").toString().
-					concat("-").concat(InitCommand.cmd.getCmap().get("input_ssn2").toString()),
-					InitCommand.cmd.getCmap().get("phone1")+"-"+InitCommand.cmd.getCmap().get("phone2")
-				    +"-"+InitCommand.cmd.getCmap().get("phone3"),
-					InitCommand.cmd.getCmap().get("input_email"),
-					"",
-					InitCommand.cmd.getCmap().get("input_addr")));
-			
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+		new ExecuteUpdate(new InsertMemberQuery()).execute();
 	}
 
 	@Override
-	public MemberBean findAccountById(String id) {
+	public AccountBean findAccountById(String id) {
 		
-		return (MemberBean) new ExecuteUpdate(new FindAccountByIdQuery()).execute();
+		return (AccountBean) new ExecuteUpdate(new FindAccountByIdQuery()).execute();
+	}
+
+	@Override
+	public MobileBean findMobileById(String id) {
+		
+		return (MobileBean) new ExecuteUpdate(new FindMobileByIdQuery()).execute();
 	}
 }

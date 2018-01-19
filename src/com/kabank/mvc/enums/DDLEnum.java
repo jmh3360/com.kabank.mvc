@@ -44,18 +44,18 @@ public enum DDLEnum {
 					+ "customer_num number primary key,"
 					+ "account_num varchar2(20) not null,"
 					+ "money varchar2(20) default 0,"
-					+ "id varchar2(20) "
+					+ "id varchar2(20), "
 					+ "FOREIGN KEY (id) REFERENCES Member(id) ON DELETE CASCADE)";
 		}
 	},
-		CREATE_TABLE_TELECOM{
+		CREATE_TABLE_MOBILE{
 		@Override
 		public String toString() {
-			return "CREATE TABLE Telecom("
+			return "CREATE TABLE Mobile("
 					+ "customer_num number primary key,"
 					+ "regdate date,"
-					+ "num varchar2(20),"
-					+ "id varchar2(20) "
+					+ "mobile_num varchar2(20),"
+					+ "id varchar2(20), "
 					+ "FOREIGN KEY (id) REFERENCES Member(id) ON DELETE CASCADE)";
 		}
 	}

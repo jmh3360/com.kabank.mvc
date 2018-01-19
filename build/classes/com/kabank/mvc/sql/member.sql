@@ -16,8 +16,9 @@ create table bank(
 
 select * from member;
 select * from bank;
-select * from telecom;
+select * from MOBILE;
 select * from tab;
+
 delete from bank whwere id ='3';
 desc member;
 update member set name = '김만호' where id = 'jmh3360';

@@ -33,7 +33,7 @@ public class AccountServiceImpl implements AccountService{
 		
 		
 	}
-	public MemberBean findAccountById(String id) {
+	public AccountBean findAccountById(String id) {
 		return MemberDAOImpl.getInstance().findAccountById(id);
 	}
 	

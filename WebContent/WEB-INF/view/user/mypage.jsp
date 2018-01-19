@@ -20,7 +20,7 @@
 	<td class="column">pass</td>
 	<td>${sessionScope.user.pass}</td>
 	<td class="column">전화번호</td>
-	<td>${sessionScope.user.phone}</td>
+	<td>${sessionScope.user.mobile.mobileNum}</td>
 </tr>
 <tr>
 	<td class="column">이름</td>

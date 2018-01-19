@@ -1,7 +1,7 @@
 package com.kabank.mvc.util;
 
 import com.kabank.mvc.enums.DMLEnum;
-import com.kabank.mvc.enums.MemberEnum;
+import com.kabank.mvc.enums.Member;
 
 public class MainTest {
 	public static void main(String[] args) {

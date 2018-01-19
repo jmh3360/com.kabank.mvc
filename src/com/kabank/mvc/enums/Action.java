@@ -21,6 +21,6 @@ public enum Action {
 			
 			return "/";
 		}
-	}
+	}, LOGOUT, MYPAGE
 	
 }
